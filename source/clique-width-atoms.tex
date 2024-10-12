@@ -50,65 +50,96 @@
 \setbeamercovered{invisible}
 
 \begin{frame}{Motywacje do badań}
-Gra odbywa się na grafie $G$ między drużyną policjantów i złodziejem. 
-Drużyna policjantów składa się z $K>0$ policjantów, gdzie $K$ to liczba policjantów.
-Policjanci i złodzieje znajdują się na wierzchołkach grafu $V\left(G\right)$.
-W grze można wyróżnić 2 fazy:
-    \begin{enumerate}
-        \item fazę umieszczania najpierw wszystkich policjantów, a potem złodzieja na wierzchołkach $V\left(G\right)$.
-        \item Fazę ruchu, która odbywa się turowo, najpierw ruszają się wszyscy policjanci, potem turę ma złodziej. 
-        Dozwolonymi ruchami są:
-        \begin{enumerate}
-            \item brak zmiany wierzołka,
-            \item zmiana wierzchołka na inny będący połączony krawędzią z wierzchołkiem, 
-            na którym aktualnie przebywa dana osoba.
-        \end{enumerate} 
-    \end{enumerate}
+    Wiele trudnych problemów z grafami można rozwiązać, ograniczając dane wejściowe do jakiejś klasy grafów.
+    Dwa główne pytania brzmią: 
+    \begin{itemize}
+        \item Dla jakich klas grafów problem grafowy jest wykonalny?
+        \item Dla jakich klas grafów jest on trudny obliczeniowo?
+    \end{itemize}
+    Idealnie byłoby, gdybyśmy chcieli odpowiedzieć na te pytania w odniesieniu do dużego zestawu problemów 
+    jednocześnie, zamiast rozważać poszczególne problemy jeden po drugim.\\
+    Parametry szerokości grafu pomagają w umożliwieniu takich wyników. Klasa grafów ma ograniczoną 
+    szerokość, jeśli istnieje stała c taka, że szerokość wszystkich jej elementów wynosi co najwyżej c.
 \end{frame}
 
 \begin{frame}{Definicje}
     \begin{proof}[Podgraf indukowany]
         \renewcommand{\qedsymbol}{}
+        Jest to graf, którego zbiór wierzchołków jest zawarty (jest podzbiorem) w zbiorze wierzchołków grafu G,
+         a zbiór krawędzi składa się ze wszystkich krawędzi grafu G, 
+         których końce należą do zbioru wierzchołków podgrafu.
     \end{proof}
     \begin{examples}
         \begin{columns}[t]
             \column{.2\textwidth}
                 \centering
                     \begin{tikzpicture}
-                        \node[cop_vertex] (v1) at (0,0) {1};
-                        \node[rob_vertex] (v2) at (0,1) {2};
-                        \node[vertex] (v3) at (0,2) {3};
-
-                        \draw[edge] (v1)--(v2);
-                        \draw[edge] (v2)--(v3);
+                        \node[draw, circle] (A) at (0,2) {};
+                        \node[draw, circle] (B) at (1,3) {};
+                        \node[draw, circle] (C) at (2,2) {};
+                        \node[draw, circle] (D) at (1,1) {};
+                        \node[draw, circle] (E) at (2,1) {};
+                    
+                        \draw (A) -- (B);
+                        \draw (A) -- (D);
+                        \draw (B) -- (C);
+                        \draw (C) -- (D);
+                        \draw (C) -- (E);
+                        \draw (D) -- (E);
                     \end{tikzpicture}
-            \column{.5\textwidth}
+                    \quad
+            \column{.2\textwidth}
                 \centering
-                    \begin{tikzpicture}
-                        \node[cop_vertex] (v1) at (0,1) {1};
-                        \node[cop_vertex] (v2) at (1,0) {2};
-                        \node[cop_vertex] (v3) at (3,0) {3};
-                        \node[cop_vertex] (v4) at (4,1) {4};
-                        \node[cop_vertex] (v5) at (3,2) {5};
-                        \node[cop_vertex] (v6) at (1,2) {6};
-                        \node[rob_vertex] (v7) at (2,1) {7};
-                        \node[vertex] (v8) at (2,2) {8};
-                        
-                        \draw[edge] (v1)--(v7);
-                        \draw[edge] (v2)--(v7);
-                        \draw[edge] (v3)--(v7);
-                        \draw[edge] (v4)--(v7);
-                        \draw[edge] (v5)--(v7);
-                        \draw[edge] (v6)--(v7);
-                        \draw[edge] (v1)--(v2);
-                        \draw[edge] (v2)--(v3);
-                        \draw[edge] (v3)--(v4);
-                        \draw[edge] (v4)--(v5);
-                        \draw[edge] (v5)--(v8);
-                        \draw[edge] (v6)--(v8);
-                        \draw[edge] (v6)--(v1);
-                    \end{tikzpicture}
+                \begin{tikzpicture}
+                    \node[draw, circle] (A) at (0,2) {};
+                    \node[draw, fill=red, circle] (B) at (1,3) {};
+                    \node[draw, fill=red, circle] (C) at (2,2) {};
+                    \node[draw, fill=red, circle] (D) at (1,1) {};
+                    \node[draw, fill=red, circle] (E) at (2,1) {};
+                
+                    \draw (A) -- (B);
+                    \draw (A) -- (D);
+                    \draw[red, thick] (B) -- (C);
+                    \draw[red, thick] (C) -- (D);
+                    \draw[red, thick] (C) -- (E);
+                    \draw[red, thick] (D) -- (E);
+                  \end{tikzpicture}
+                  \quad
+            \column{.2\textwidth}  
+            \centering
+            \begin{tikzpicture}
+                \node[draw, circle] (A) at (0,2) {};
+                \node[draw, fill=red, circle] (B) at (1,3) {};
+                \node[draw, fill=red, circle] (C) at (2,2) {};
+                \node[draw, fill=red, circle] (D) at (1,1) {};
+                \node[draw, fill=red, circle] (E) at (2,1) {};
+            
+                \draw (A) -- (B);
+                \draw (A) -- (D);
+                \draw[red, thick] (B) -- (C);
+                \draw[red, thick] (C) -- (D);
+                \draw[red, thick] (C) -- (E);
+                \draw (D) -- (E);
+              \end{tikzpicture}
+              \quad    
+              \column{.2\textwidth}
+              \centering
+              \begin{tikzpicture}
+                \node[draw, circle] (A) at (0,2) {};
+                \node[draw, fill=red, circle] (B) at (1,3) {};
+                \node[draw, circle] (C) at (2,2) {};
+                \node[draw, fill=red, circle] (D) at (1,1) {};
+                \node[draw, fill=red, circle] (E) at (2,1) {};
+            
+                \draw (A) -- (B);
+                \draw (A) -- (D);
+                \draw (B) -- (C);
+                \draw (C) -- (D);
+                \draw (C) -- (E);
+                \draw[red, thick] (D) -- (E);
+              \end{tikzpicture}
         \end{columns}
+    
     \end{examples}
 \end{frame}
 
@@ -164,100 +195,149 @@ W grze można wyróżnić 2 fazy:
 \begin{frame}{Definicje}
     \begin{proof}[Atom]
         \renewcommand{\qedsymbol}{}
+        Spójny graf, który nie posiada zbioru rozpinającego będącego kliką.
     \end{proof}
     \begin{examples}
-        \begin{columns}[t]
-            \column{.2\textwidth}
                 \centering
-                    \begin{tikzpicture}
-                        \node[cop_vertex] (v1) at (0,0) {1};
-                        \node[rob_vertex] (v2) at (0,1) {2};
-                        \node[vertex] (v3) at (0,2) {3};
+                \begin{tikzpicture}
+                    % Nodes for K5
+                    \node[draw, circle] (A) at (0,2) {};
+                    \node[draw, circle] (B) at (2,3) {};
+                    \node[draw, circle] (C) at (4,2) {};
+                    \node[draw, circle] (D) at (3,0) {};
+                    \node[draw, circle] (E) at (1,0) {};
+                  
+                    % Additional nodes (outside K5)
+                    \node[draw, circle] (F) at (5,4) {};  % New node connected to C
+                    \node[draw, circle] (G) at (0,-1) {};  % New node connected to E
+                    \node[draw, circle] (H) at (4,-1) {};  % New node connected to D
+                  
+                    % Edges for K5 (fully connected)
+                    \draw[thick] (A) -- (B);
+                    \draw[thick] (A) -- (C);
+                    \draw[thick] (A) -- (D);
+                    \draw[thick] (A) -- (E);
+                    \draw[thick] (B) -- (C);
+                    \draw[thick] (B) -- (D);
+                    \draw[thick] (B) -- (E);
+                    \draw[thick] (C) -- (D);
+                    \draw[thick] (C) -- (E);
+                    \draw[thick] (D) -- (E);
+                  
+                    % Additional edges from K5
+                    \draw[thick] (C) -- (F);  % Edge from C to new node
+                    \draw[thick] (E) -- (G);  % Edge from E to new node
+                    \draw[thick] (D) -- (H);  % Edge from D to new node
+                  \end{tikzpicture}
+                \begin{tikzpicture}
+                    \node[draw, circle] (A) at (0,0) {};
+                    \node[draw, circle] (B) at (2,0) {};
+                    \node[draw, circle] (C) at (1,2) {};
+                    \node[draw, circle] (D) at (3,1) {};
+                    \node[draw, circle] (E) at (-1,1) {};
 
-                        \draw[edge] (v1)--(v2);
-                        \draw[edge] (v2)--(v3);
-                    \end{tikzpicture}
-            \column{.5\textwidth}
-                \centering
-                    \begin{tikzpicture}
-                        \node[cop_vertex] (v1) at (0,1) {1};
-                        \node[cop_vertex] (v2) at (1,0) {2};
-                        \node[cop_vertex] (v3) at (3,0) {3};
-                        \node[cop_vertex] (v4) at (4,1) {4};
-                        \node[cop_vertex] (v5) at (3,2) {5};
-                        \node[cop_vertex] (v6) at (1,2) {6};
-                        \node[rob_vertex] (v7) at (2,1) {7};
-                        \node[vertex] (v8) at (2,2) {8};
-                        
-                        \draw[edge] (v1)--(v7);
-                        \draw[edge] (v2)--(v7);
-                        \draw[edge] (v3)--(v7);
-                        \draw[edge] (v4)--(v7);
-                        \draw[edge] (v5)--(v7);
-                        \draw[edge] (v6)--(v7);
-                        \draw[edge] (v1)--(v2);
-                        \draw[edge] (v2)--(v3);
-                        \draw[edge] (v3)--(v4);
-                        \draw[edge] (v4)--(v5);
-                        \draw[edge] (v5)--(v8);
-                        \draw[edge] (v6)--(v8);
-                        \draw[edge] (v6)--(v1);
-                    \end{tikzpicture}
-        \end{columns}
+                    % Edges for the K3 clique (A, B, C)
+                    \draw[thick] (A) -- (B);
+                    \draw[thick] (B) -- (C);
+                    \draw[thick] (C) -- (A);
+
+                    % Additional edges (to show that K3 is not a cut-set)
+                    \draw[thick] (A) -- (E);  % A to E
+                    \draw[thick] (B) -- (D);  % B to D
+                    \draw[thick] (C) -- (D);  % C to D
+                    \draw[thick] (E) -- (C);  % E to C
+                  \end{tikzpicture}
     \end{examples}
 \end{frame}
 
 \begin{frame}{Definicje}
     \begin{proof}[Szerokość kliki]
         \renewcommand{\qedsymbol}{}
+        Szerokość kliki grafu G, oznaczona jako cw(G), to minimalna liczba etykiet potrzebnych do skonstruowania G przy użyciu czterech następujących operacji:
+        \begin{itemize}
+            \item utworzenie nowego grafu składającego się z pojedynczego wierzchołka $v$ z etykietą $i$; 
+            \item przyjęcie sumy rozłącznej dwóch grafów oznaczonych etykietami $G_1$ i $G_2$;
+            \item dodanie krawędzi pomiędzy każdym wierzchołkiem o etykiecie $i$ a każdym wierzchołkiem o etykiecie j $(i \neq j)$;
+            \item oznaczenie każdego wierzchołka etykietą $i$ tak, aby miał etykietę $j$.
+        \end{itemize}
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Szerokość kliki}
+    \begin{proof}[]
+        \renewcommand{\qedsymbol}{}
+        Klasa grafów G ma ograniczoną szerokość kliki, jeśli istnieje stała c taka, że $cw(G) \leq c$ dla każdego $G \in G$; w przeciwnym razie szerokość kliki $G$ jest nieograniczona.
     \end{proof}
     \begin{examples}
         \begin{columns}[t]
             \column{.2\textwidth}
                 \centering
                     \begin{tikzpicture}
-                        \node[cop_vertex] (v1) at (0,0) {1};
-                        \node[rob_vertex] (v2) at (0,1) {2};
-                        \node[vertex] (v3) at (0,2) {3};
-
-                        \draw[edge] (v1)--(v2);
-                        \draw[edge] (v2)--(v3);
+                        \node[draw, circle] (A) at (0,2) {};
+                        \node[draw, circle] (B) at (2,3) {};
+                        \node[draw, circle] (C) at (4,2) {};
+                        \node[draw, circle] (D) at (3,0) {};
+                        \node[draw, circle] (E) at (1,0) {};
+                      
+                        % Edges for K5 (fully connected)
+                        \draw[thick] (A) -- (B);
+                        \draw[thick] (A) -- (C);
+                        \draw[thick] (A) -- (D);
+                        \draw[thick] (A) -- (E);
+                        \draw[thick] (B) -- (C);
+                        \draw[thick] (B) -- (D);
+                        \draw[thick] (B) -- (E);
+                        \draw[thick] (C) -- (D);
+                        \draw[thick] (C) -- (E);
+                        \draw[thick] (D) -- (E);
                     \end{tikzpicture}
             \column{.5\textwidth}
                 \centering
                     \begin{tikzpicture}
-                        \node[cop_vertex] (v1) at (0,1) {1};
-                        \node[cop_vertex] (v2) at (1,0) {2};
-                        \node[cop_vertex] (v3) at (3,0) {3};
-                        \node[cop_vertex] (v4) at (4,1) {4};
-                        \node[cop_vertex] (v5) at (3,2) {5};
-                        \node[cop_vertex] (v6) at (1,2) {6};
-                        \node[rob_vertex] (v7) at (2,1) {7};
-                        \node[vertex] (v8) at (2,2) {8};
-                        
-                        \draw[edge] (v1)--(v7);
-                        \draw[edge] (v2)--(v7);
-                        \draw[edge] (v3)--(v7);
-                        \draw[edge] (v4)--(v7);
-                        \draw[edge] (v5)--(v7);
-                        \draw[edge] (v6)--(v7);
-                        \draw[edge] (v1)--(v2);
-                        \draw[edge] (v2)--(v3);
-                        \draw[edge] (v3)--(v4);
-                        \draw[edge] (v4)--(v5);
-                        \draw[edge] (v5)--(v8);
-                        \draw[edge] (v6)--(v8);
-                        \draw[edge] (v6)--(v1);
+                        \node[draw, circle] (A) at (3,0) {};
+                        \node[draw, circle] (B) at (4,0) {};
+                        \node[draw, circle] (C) at (5,0) {};
+                        \node[draw, circle] (D) at (6,0) {};
+                        \node[draw, circle] (E) at (7,0) {};
+
+                        \node[draw, circle] (F) at (3,1) {};
+                        \node[draw, circle] (G) at (4,1) {};
+                        \node[draw, circle] (H) at (5,1) {};
+                        \node[draw, circle] (I) at (6,1) {};
+                        \node[draw, circle] (J) at (7,1) {};
+                        \node[draw, circle] (K) at (8,1) {};
+
+                        \node[draw, circle] (L) at (4,2) {};
+                        \node[draw, circle] (M) at (5,2) {};
+                        \node[draw, circle] (N) at (6,2) {};
+                        \node[draw, circle] (O) at (7,2) {};
+                        \node[draw, circle] (P) at (8,2) {};
+
+                        \draw[thick] (A) -- (B);
+                        \draw[thick] (B) -- (C);
+                        \draw[thick] (C) -- (D);
+                        \draw[thick] (D) -- (E);
+
+                        \draw[thick] (F) -- (G);
+                        \draw[thick] (G) -- (H);
+                        \draw[thick] (H) -- (I);
+                        \draw[thick] (I) -- (J);
+                        \draw[thick] (J) -- (K);
+
+                        \draw[thick] (L) -- (M);
+                        \draw[thick] (M) -- (N);
+                        \draw[thick] (N) -- (O);
+                        \draw[thick] (O) -- (P);
+
+                        \draw[thick] (A) -- (F);
+                        \draw[thick] (H) -- (C);
+                        \draw[thick] (J) -- (E);
+                        \draw[thick] (P) -- (K);
+                        \draw[thick] (L) -- (G);
+                        \draw[thick] (N) -- (I);
                     \end{tikzpicture}
         \end{columns}
     \end{examples}
-\end{frame}
-
-\begin{frame}{Szerokość kliki}
-    \begin{itemize}
-        \item Ograniczona szerokość kliki
-        \item Nieograniczona szerokość kliki 
-    \end{itemize}
 \end{frame}
 
 \begin{frame}{Po co nam atomy?}
