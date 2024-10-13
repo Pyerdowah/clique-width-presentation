@@ -435,11 +435,11 @@
                     \draw[thick] (D) -- (H);  % Edge from D to new node
                   \end{tikzpicture}
                 \begin{tikzpicture}
-                    \node[draw, circle] (A) at (0,0) {a};
-                    \node[draw, circle] (B) at (2,0) {b};
-                    \node[draw, circle] (C) at (1,2) {c};
-                    \node[draw, circle] (D) at (3,1) {d};
-                    \node[draw, circle] (E) at (-1,1) {e};
+                    \node[draw, circle] (A) at (0,0) {};
+                    \node[draw, circle] (B) at (2,0) {};
+                    \node[draw, circle] (C) at (1,2) {};
+                    \node[draw, circle] (D) at (3,1) {};
+                    \node[draw, circle] (E) at (-1,1) {};
 
                     % Edges for the K3 clique (A, B, C)
                     \draw[thick] (A) -- (B);
@@ -456,9 +456,21 @@
     \end{examples}
 \end{frame}
 
+\begin{frame}{Dlaczego atomy?}
+    Wiele klasycznych problemów grafowych, między innymi:
+    \begin{itemize}
+        \item Kolorowanie
+        \item Minimalne dopełnienie
+        \item Maksymalna klika
+        \item Maksymalny ważony zbiór niezależny
+        \item Maksymalne indukowane dopasowanie
+    \end{itemize}    
+    są rozwiązywalne w czasie wielomianowym na grafie dziedzicznym klasy $G$ wtedy i tylko wtedy, gdy ma to miejsce w przypadku atomów $G$.
+\end{frame}
+
 \begin{frame}
     \begin{theorem}
-        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki)
+        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma nieograniczoną szerokość kliki)
         \begin{figure}[h]
             \centering
             \begin{minipage}{0.45\textwidth}
@@ -505,7 +517,7 @@
 
 \begin{frame}
     \begin{theorem}
-        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki)
+        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma nieograniczoną szerokość kliki)
     \end{theorem}
     \begin{proof}
         \renewcommand{\qedsymbol}{}
@@ -523,7 +535,8 @@
         Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych atomów z indukowanym $C_5$ ma ograniczoną szerokość kliki.
     \end{lemma}
     \begin{proof}
-        Niech $G$ będzie atomem wolnym od $(2P_2, P_2 + P_3)$, który zawiera indukowany cykl $C = v_1, \dots, v_5$. Wprowadzamy następujące oznaczenia: dla $S \subseteq \{1, 2, 3, 4, 5\}$, niech $V_S$ oznacza zbiór wierzchołków $x \in V(G) \setminus V(C)$, takich że $N(x) \cap V(C) = \{v_i \mid i \in S\}$.
+        \renewcommand{\qedsymbol}{}
+        Niech $G$ będzie atomem wolnym od $(2P_2, \overline{P_2 + P_3})$, który zawiera indukowany cykl $C = v_1, \dots, v_5$. Wprowadzamy następujące oznaczenia: dla $S \subseteq \{1, 2, 3, 4, 5\}$, niech $V_S$ oznacza zbiór wierzchołków $x \in V(G) \setminus V(C)$, takich że $N(x) \cap V(C) = \{v_i \mid i \in S\}$.
         
         Rozważamy możliwe wartości $S$.
     \end{proof}
@@ -532,7 +545,7 @@
 \begin{frame}
     \begin{theorem}
         \renewcommand{\qedsymbol}{}
-        Jeżeli $S = \{i, i+1, i+3\}$, to $V_S$ jest puste dla każdego $i$.
+        $V_i \cup V_{i,i+1} \cup V_{i-1,i+1}$ jest puste dla każdego $i$.
     \end{theorem}
     \graphBigger
 \end{frame}
@@ -540,7 +553,7 @@
 \begin{frame}
     \begin{theorem}
         \renewcommand{\qedsymbol}{}
-        Zbiory $V_\emptyset$ i $V_{i,i+2}$ dla każdego $i$ są niezależne.
+        Zbiory $V_\emptyset \cup V_{i,i+2}$ dla każdego $i$ są niezależne.
     \end{theorem}
     \graphBigger
 \end{frame}
@@ -573,14 +586,6 @@
     \begin{theorem}
         \renewcommand{\qedsymbol}{}
         Jeżeli $x \in V_{1,2,3,4,5}$, to $x$ jest pełne w stosunku do $V(G) \setminus \{x\}$. W szczególności, $V_{1,2,3,4,5}$ jest kliką.
-    \end{theorem}
-    \graphBigger
-\end{frame}
-
-\begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Jeżeli $S = \{i, i+1, i+3\}$, to $V_S$ jest puste dla każdego $i$.
     \end{theorem}
     \graphBigger
 \end{frame}
@@ -636,7 +641,7 @@
 \begin{frame}
     \begin{theorem}
         \renewcommand{\qedsymbol}{}
-        Dla każdego $i$, $V_{i,i+2}$ jest pełne względem $V_{1,2,3,4}$.
+        Dla $i \in \{1,2\}$, $V_{i,i+2}$ jest pełne względem $V_{1,2,3,4}$.
     \end{theorem}
     \graphSmaller
 \end{frame}
@@ -679,10 +684,75 @@
         \end{proof}
 \end{frame}
 
-\begin{frame}{Lista problemów otwartych}
+\begin{frame}
+    \begin{theorem}
+        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma nieograniczoną szerokość kliki)
+    \end{theorem}
+    \begin{proof}
+        Klasa grafów podzielnych to klasa grafów wolnych od $(C_4, C_5, 2P_2)$. Ponieważ grafy podzielne tworzą podklasę klasy grafów wolnych od $(2P_2, \overline{P_2 + P_3})$, a grafy podzielne mają nieograniczoną szerokość kliki, wynika z tego, że grafy wolne od $(2P_2, \overline{P_2 + P_3})$ również mają nieograniczoną szerokość kliki. Przypomnijmy, że atomy podzielne są grafami pełnymi, a zatem ich szerokość kliki wynosi co najwyżej 2. Atomy wolne od $(2P_2, \overline{P_2 + P_3})$, które nie są podzielne, muszą zatem zawierać indukowany $C_4$ lub $C_5$.
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Pozostałe wyniki}
+    \begin{enumerate}
+        \item Klasa atomów w $G$ ma ograniczoną szerokość kliki, jeśli jest równoważna klasie grafów wolnych od $(H_1, H_2)$, gdzie spełniony jest jeden z następujących warunków:
+        \begin{itemize}
+            \item[(i)] $H_1$ lub $H_2 \subseteq_i P_4$
+            \item[(ii)] $H_1 = K_s$ i $H_2 = tP_1$ dla pewnych $s, t \geq 1$
+            \item[(iii)] $H_1 \subseteq_i \text{paw}$ i $H_2 \subseteq_i K_{1,3} + 3P_1, K_{1,3} + P_2, P_1 + P_2 + P_3, P_1 + P_5, P_1 + S_{1,1,2}, P_2 + P_4, P_6, S_{1,1,3}$ lub $S_{1,2,2}$
+            \item[(iv)] $H_1 \subseteq_i \text{diamond}$ i $H_2 \subseteq_i P_1 + 2P_2, 3P_1 + P_2$ lub $P_2 + P_3$
+            \item[(v)] $H_1 \subseteq_i \text{gem}$ i $H_2 \subseteq_i P_1 + P_4$ lub $P_5$
+            \item[(vi)] $H_1 \subseteq_i K_3 + P_1$ i $H_2 \subseteq_i K_{1,3}$
+            \item[(vii)] $H_1 \subseteq_i \overline{2P_1 + P_3}$ i $H_2 \subseteq_i 2P_1 + P_3$
+        \end{itemize}
+        
+        \item Klasa atomów w $G$ ma ograniczoną szerokość kliki, jeśli $G$ jest podklasą klasy:
+        \begin{itemize}
+            \item[(i)] grafów wolnych od $(P_6, \overline{2P_2})$
+            \item[(ii)] grafów wolnych od $(2P_2, \overline{P_2 + P_3})$
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Pozostałe wyniki}
+    \begin{enumerate}
+        \item Klasa atomów w $G$ ma nieograniczoną szerokość kliki, jeśli jest równoważna klasie grafów wolnych od $(H_1, H_2)$, gdzie spełniony jest jeden z następujących warunków:
+        \begin{itemize}
+            \item[(i)] $H_1 \notin S$ i $H_2 \notin S$
+            \item[(ii)] $H_1 \notin S$ i $H_2 \notin \overline{S}$
+            \item[(iii)] $H_1 \supseteq_i K_3 + P_1$ i $H_2 \supseteq_i 4P_1$ lub $2P_2$
+            \item[(iv)] $H_1 \supseteq_i \text{diamond}$ i $H_2 \supseteq_i K_{1,3}, 5P_1$ lub $P_2 + P_4$
+            \item[(v)] $H_1 \supseteq_i K_3$ i $H_2 \supseteq_i 2P_1 + 2P_2, 2P_1 + P_4, 4P_1 + P_2, 3P_2$ lub $2P_3$
+            \item[(vi)] $H_1 \supseteq_i K_4$ i $H_2 \supseteq_i P_1 + P_4, 3P_1 + P_2$ lub $2P_2$
+            \item[(vii)] $H_1 \supseteq_i \text{gem}$ i $H_2 \supseteq_i P_1 + 2P_2$
+        \end{itemize}
+        
+        \item Klasa atomów w $G$ ma nieograniczoną szerokość kliki, jeśli zawiera klasę grafów wolnych od $(H_1, H_2)$, gdzie spełniony jest jeden z następujących warunków:
+        \begin{itemize}
+            \item[(i)] $H_1 \supseteq_i \text{diamond}$ i $H_2 \supseteq_i P_1 + P_6$
+            \item[(ii)] $H_1 \supseteq_i 2P_1 + P_2$ i $H_2 \supseteq_i P_6$
+            \item[(iii)] $H_1 \supseteq_i \text{gem}$ i $H_2 \supseteq_i P_6$
+            \item[(iv)] $H_1 \supseteq_i P_1 + 2P_2$ lub $P_6$ i $H_2 \supseteq_i \overline{P_1 + 2P_2}$ lub $\overline{P_2 + P_3}$
+            \item[(v)] $H_1 \supseteq_i 2P_2$ i $H_2 \supseteq_i \overline{P_2 + P_4}, \overline{3P_2}$ lub $\overline{P_5}$
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Problemy otwarte}
+    Czy klasa atomów wolnych od $(H_1, H_2)$ ma ograniczoną szerokość kliki, jeśli:
     \begin{itemize}
-        \item item
+        \item[(i)] $H_1 = \text{diamond}$ i $H_2 = P_6$
+        \item[(ii)] $H_1 = C_4$ i $H_2 \in \{P_1 + 2P_2, P_2 + P_4, 3P_2\}$
+        \item[(iii)] $H_1 = \overline{P_1 + 2P_2}$ i $H_2 \in \{2P_2, P_2 + P_3, P_5\}$
+        \item[(iv)] $H_1 = \overline{P_2 + P_3}$ i $H_2 \in \{P_2 + P_3, P_5\}$
+        \item[(v)] $H_1 = K_3$ i $H_2 \in \{P_1 + S_{1,1,3}, S_{1,2,3}\}^*$
+        \item[(vi)] $H_1 = 3P_1$ i $H_2 = \overline{P_1 + S_{1,1,3}}^*$
+        \item[(vii)] $H_1 = \text{diamond}$ i $H_2 \in \{P_1 + P_2 + P_3, P_1 + P_5\}^*$
+        \item[(viii)] $H_1 = 2P_1 + P_2$ i $H_2 \in \{\overline{P_1 + P_2 + P_3}, \overline{P_1 + P_5}\}^*$
+        \item[(ix)] $H_1 = \text{gem}$ i $H_2 = P_2 + P_3^*$
+        \item[(x)] $H_1 = P_1 + P_4$ i $H_2 = \overline{P_2 + P_3}^*$
     \end{itemize}
+    Przypadki oznaczone gwiazdką (*) oznaczają, że nie jest znana ograniczoność szerokości kliki dla całej klasy grafów wolnych od $(H_1, H_2)$ 
 \end{frame}
 
 \setbeamercovered{transparent}
