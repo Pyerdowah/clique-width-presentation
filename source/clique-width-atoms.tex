@@ -8,8 +8,8 @@
 \usepackage{comment}
 \usepackage{hyperref}
 \usepackage{tikz} 
-\usetikzlibrary{graphs,graphs.standard,automata}
-
+\usepackage{caption}
+\usetikzlibrary{graphs,graphs.standard,automata,shapes,positioning,calc}
 
 % polish language
 \usepackage[polish]{babel}
@@ -29,12 +29,111 @@
 \date{\today}
 
 \setbeamercovered{transparent}
-
-
+\captionsetup{labelformat=empty}
 
 %%% DOCUMENT BEGINS HERE %%%
 
 \begin{document}
+
+\newcommand{\graphBigger}{
+    \centering
+    \begin{tikzpicture}[scale=0.8, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+
+        % Initial cycle C_5 - pentagon shape
+        \node (v1) [fill=black] at (90:1.5) {};
+        \node (v2) [fill=black] at (162:1.5) {};
+        \node (v3) [fill=black] at (234:1.5) {};
+        \node (v4) [fill=black] at (306:1.5) {};
+        \node (v5) [fill=black] at (18:1.5) {};
+        
+        % Draw edges for the initial cycle C_5
+        \draw (v1) -- (v2);
+        \draw (v2) -- (v3);
+        \draw (v3) -- (v4);
+        \draw (v4) -- (v5);
+        \draw (v5) -- (v1);
+    
+        % First neighborhood
+        \node (n1) [fill=purple, ellipse, draw=purple, minimum size=15pt] at ($(v1) + (4, 1)$) {};
+        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt] at ($(v1) + (2, 1)$) {};
+        \node (n3) [fill=green, ellipse, draw=green, minimum size=15pt] at ($(v1) + (0, 1)$) {};
+        \node (n4) [fill=yellow, ellipse, draw=yellow, minimum size=15pt] at ($(v1) + (-2, 1)$) {};
+        \node (n5) [fill=red, ellipse, draw=red, minimum size=15pt] at ($(v1) + (-4, 1)$) {};
+        
+        % Edges from first neighborhood to initial cycle
+        \draw[purple, bend left] (n1) to (v1);
+        \draw[purple, bend left] (n1) to (v2);
+        \draw[purple, bend left] (n1) to (v3);
+        \draw[purple, bend left] (n1) to (v4);
+        \draw[purple, bend left] (n1) to (v5);
+        \draw[blue, bend left] (n2) to (v2);
+        \draw[blue, bend left] (n2) to (v1);
+        \draw[blue, bend left] (n2) to (v5);
+        \draw[green, bend right] (n3) to (v1);
+        \draw[green, bend right] (n3) to (v2);
+        \draw[red, bend right] (n5) to (v3);
+        \draw[yellow, bend right] (n4) to (v2);
+        
+        % Second neighborhood (independent set)
+        \node (indep1) [fill=none] at ($(n1) + (0, 1.2)$) {};
+        \node (indep2) [fill=none] at ($(n2) + (-0.75, 1)$) {};
+        \node (indep3) [fill=none] at ($(n3) + (-0.75, 0.8)$) {};
+        \node (indep4) [fill=none] at ($(n4) + (0.75, 0.8)$) {};
+        \node (indep5) [fill=none] at ($(n4) + (0, 1)$) {};
+        \node (indep6) [fill=none] at ($(n4) + (-0.5, 0.8)$) {};
+
+        \node (dots1) [draw=none, fill=none] at ($(v1) + (-5, 1)$) {$\cdots$};
+        \node (dots2) [draw=none, fill=none] at ($(indep1) + (1, 0)$) {$\cdots$};
+
+    \end{tikzpicture}
+}
+
+\newcommand{\graphSmaller}{
+    \centering
+    \begin{tikzpicture}[scale=0.8, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+
+        % Initial cycle C_5 - pentagon shape
+        \node (v1) [fill=black] at (90:1.5) {};
+        \node (v2) [fill=black] at (180:1.5) {};
+        \node (v3) [fill=black] at (270:1.5) {};
+        \node (v4) [fill=black] at (360:1.5) {};
+        
+        % Draw edges for the initial cycle C_5
+        \draw (v1) -- (v2);
+        \draw (v2) -- (v3);
+        \draw (v3) -- (v4);
+        \draw (v4) -- (v1);
+    
+        % First neighborhood
+        \node (n1) [fill=purple, ellipse, draw=purple, minimum size=15pt] at ($(v1) + (4, 1)$) {};
+        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt] at ($(v1) + (2, 1)$) {};
+        \node (n3) [fill=green, ellipse, draw=green, minimum size=15pt] at ($(v1) + (0, 1)$) {};
+        \node (n4) [fill=yellow, ellipse, draw=yellow, minimum size=15pt] at ($(v1) + (-2, 1)$) {};
+        
+        % Edges from first neighborhood to initial cycle
+        \draw[purple, bend left] (n1) to (v1);
+        \draw[purple, bend left] (n1) to (v2);
+        \draw[purple, bend left] (n1) to (v3);
+        \draw[purple, bend left] (n1) to (v4);
+        \draw[blue, bend left] (n2) to (v2);
+        \draw[blue, bend left] (n2) to (v1);
+        \draw[green, bend right] (n3) to (v1);
+        \draw[green, bend right] (n3) to (v2);
+        \draw[yellow, bend right] (n4) to (v2);
+        
+        % Second neighborhood (independent set)
+        \node (indep1) [fill=none] at ($(n1) + (0, 1.2)$) {};
+        \node (indep2) [fill=none] at ($(n2) + (-0.75, 1)$) {};
+        \node (indep3) [fill=none] at ($(n3) + (-0.75, 0.8)$) {};
+        \node (indep4) [fill=none] at ($(n4) + (0.75, 0.8)$) {};
+        \node (indep5) [fill=none] at ($(n4) + (0, 1)$) {};
+        \node (indep6) [fill=none] at ($(n4) + (-0.5, 0.8)$) {};
+
+        \node (dots1) [draw=none, fill=none] at ($(v1) + (-3, 1)$) {$\cdots$};
+        \node (dots2) [draw=none, fill=none] at ($(indep1) + (1, 0)$) {$\cdots$};
+
+    \end{tikzpicture}
+}
 
 \tikzset{vertex/.style={circle, draw=black, inner sep=0pt, minimum size=0.6cm, text width=0.75cm, align=center}}
 \tikzset{cop_vertex/.style={vertex, fill=blue!50}}
@@ -146,107 +245,64 @@
 \begin{frame}{Definicje}
     \begin{proof}[Klasa grafów heredytalnych (dziedzicznych)]
         \renewcommand{\qedsymbol}{}
-    \end{proof}
-    \begin{proof}[Klasa grafów $(H_1, H_2)$-wolnych]
-        \renewcommand{\qedsymbol}{}
+        Klasa jest dziedziczna wtedy i tylko wtedy, gdy moze być scharakteryzowana prze unikalny zbiór $H$ minimalnych, zabronionych podgrafów indukowanych.\\
+        Graf $G$ jest $H$-wolny jeśli $G$ nie ma podgrafu indukowanego, izomorficznego do $H$.\\
+        Graf $G$ jest ($H_1,...,H_p$)-wolny jeśli $G$ nie ma podgrafów indukowanych, izomorficznych do $H_i$ dla każdego $i$.\\
     \end{proof}
     \begin{examples}
         \begin{columns}[t]
             \column{.2\textwidth}
                 \centering
                     \begin{tikzpicture}
-                        \node[cop_vertex] (v1) at (0,0) {1};
-                        \node[rob_vertex] (v2) at (0,1) {2};
-                        \node[vertex] (v3) at (0,2) {3};
-
-                        \draw[edge] (v1)--(v2);
-                        \draw[edge] (v2)--(v3);
-                    \end{tikzpicture}
-            \column{.5\textwidth}
-                \centering
-                    \begin{tikzpicture}
-                        \node[cop_vertex] (v1) at (0,1) {1};
-                        \node[cop_vertex] (v2) at (1,0) {2};
-                        \node[cop_vertex] (v3) at (3,0) {3};
-                        \node[cop_vertex] (v4) at (4,1) {4};
-                        \node[cop_vertex] (v5) at (3,2) {5};
-                        \node[cop_vertex] (v6) at (1,2) {6};
-                        \node[rob_vertex] (v7) at (2,1) {7};
-                        \node[vertex] (v8) at (2,2) {8};
+                        \node[draw, fill=red, circle] (v1) at (0,0) {};
+                        \node[draw, fill=red, circle] (v2) at (1,0) {};
+                        \node[draw, fill=red, circle] (v3) at (2,0) {};
+                        \node[draw, fill=red, circle] (v4) at (3,0) {};
                         
-                        \draw[edge] (v1)--(v7);
-                        \draw[edge] (v2)--(v7);
-                        \draw[edge] (v3)--(v7);
-                        \draw[edge] (v4)--(v7);
-                        \draw[edge] (v5)--(v7);
-                        \draw[edge] (v6)--(v7);
-                        \draw[edge] (v1)--(v2);
-                        \draw[edge] (v2)--(v3);
-                        \draw[edge] (v3)--(v4);
-                        \draw[edge] (v4)--(v5);
-                        \draw[edge] (v5)--(v8);
-                        \draw[edge] (v6)--(v8);
-                        \draw[edge] (v6)--(v1);
+                        % Edges for P_4
+                        \draw[red, thick] (v1) -- (v2);
+                        \draw[red, thick] (v2) -- (v3);
+                        \draw[red, thick] (v3) -- (v4);
                     \end{tikzpicture}
-        \end{columns}
-    \end{examples}
-\end{frame}
-
-\begin{frame}{Definicje}
-    \begin{proof}[Atom]
-        \renewcommand{\qedsymbol}{}
-        Spójny graf, który nie posiada zbioru rozpinającego będącego kliką.
-    \end{proof}
-    \begin{examples}
+                    \quad
+            \column{.2\textwidth}
                 \centering
                 \begin{tikzpicture}
-                    % Nodes for K5
-                    \node[draw, circle] (A) at (0,2) {};
-                    \node[draw, circle] (B) at (2,3) {};
-                    \node[draw, circle] (C) at (4,2) {};
-                    \node[draw, circle] (D) at (3,0) {};
-                    \node[draw, circle] (E) at (1,0) {};
-                  
-                    % Additional nodes (outside K5)
-                    \node[draw, circle] (F) at (5,4) {};  % New node connected to C
-                    \node[draw, circle] (G) at (0,-1) {};  % New node connected to E
-                    \node[draw, circle] (H) at (4,-1) {};  % New node connected to D
-                  
-                    % Edges for K5 (fully connected)
-                    \draw[thick] (A) -- (B);
-                    \draw[thick] (A) -- (C);
-                    \draw[thick] (A) -- (D);
-                    \draw[thick] (A) -- (E);
-                    \draw[thick] (B) -- (C);
-                    \draw[thick] (B) -- (D);
-                    \draw[thick] (B) -- (E);
-                    \draw[thick] (C) -- (D);
-                    \draw[thick] (C) -- (E);
-                    \draw[thick] (D) -- (E);
-                  
-                    % Additional edges from K5
-                    \draw[thick] (C) -- (F);  % Edge from C to new node
-                    \draw[thick] (E) -- (G);  % Edge from E to new node
-                    \draw[thick] (D) -- (H);  % Edge from D to new node
+                    \node[draw, circle] (v1) at (90:1) {};
+                    \node[draw, circle] (v2) at (162:1) {};
+                    \node[draw, circle] (v3) at (234:1) {};
+                    \node[draw, circle] (v4) at (306:1) {};
+                    \node[draw, circle] (v5) at (18:1) {};
+                    
+                    % Edges for C_5
+                    \draw (v1) -- (v2);
+                    \draw (v2) -- (v3);
+                    \draw (v2) -- (v4);
+                    \draw (v3) -- (v5);
+                    \draw (v3) -- (v4);
+                    \draw (v4) -- (v5);
+                    \draw (v5) -- (v1);
                   \end{tikzpicture}
-                \begin{tikzpicture}
-                    \node[draw, circle] (A) at (0,0) {};
-                    \node[draw, circle] (B) at (2,0) {};
-                    \node[draw, circle] (C) at (1,2) {};
-                    \node[draw, circle] (D) at (3,1) {};
-                    \node[draw, circle] (E) at (-1,1) {};
-
-                    % Edges for the K3 clique (A, B, C)
-                    \draw[thick] (A) -- (B);
-                    \draw[thick] (B) -- (C);
-                    \draw[thick] (C) -- (A);
-
-                    % Additional edges (to show that K3 is not a cut-set)
-                    \draw[thick] (A) -- (E);  % A to E
-                    \draw[thick] (B) -- (D);  % B to D
-                    \draw[thick] (C) -- (D);  % C to D
-                    \draw[thick] (E) -- (C);  % E to C
-                  \end{tikzpicture}
+                  \quad
+            \column{.2\textwidth}  
+            \centering
+            \begin{tikzpicture}
+                \node[draw, fill=red, circle] (v1) at (90:1) {};
+                \node[draw, fill=red, circle] (v2) at (162:1) {};
+                \node[draw, fill=red, circle] (v3) at (234:1) {};
+                \node[draw, circle] (v4) at (306:1) {};
+                \node[draw, fill=red, circle] (v5) at (18:1) {};
+                
+                % Edges for C_5
+                \draw[red, thick] (v1) -- (v2);
+                \draw[red, thick] (v2) -- (v3);
+                \draw (v3) -- (v4);
+                \draw (v4) -- (v5);
+                \draw[red, thick] (v5) -- (v1);
+                \draw (v2) -- (v4);
+              \end{tikzpicture}
+              \quad    
+        \end{columns}
     \end{examples}
 \end{frame}
 
@@ -340,1240 +396,297 @@
     \end{examples}
 \end{frame}
 
-\begin{frame}{Po co nam atomy?}
-    Czy istnieją klasy grafów heredytalnych z nieograniczoną szerokością kliki, których atomy mają ograniczoną szerokość kliki?
-    \begin{itemize}
-        \item split grafy
-        \item H-wolne grafy - nie
-    \end{itemize}
-\end{frame}
 
-\begin{frame}{Cel}
-    Które $(H_1, H_2)$-wolne klasy grafów z nieograniczoną szerokością kliki mają taką własność, ze ich atomy mają ograniczona szerokość kliki?
-    \pause 
-    \begin{proof}[]
+\begin{frame}{Definicje}
+    \begin{proof}[Atom]
         \renewcommand{\qedsymbol}{}
-        Klasa atomów $(H_1, H_2)$-wolnych ma ogranicozną szerkość kliki, jeśli
-        $H_1 \subseteq_i 2P_2$ i $ H_2 \subseteq_i \overline{P_2 + P_3}$ \\
-        \pause
-        Klasa atomów $(H_1, H_2)$-wolnych ma nieograniczoną szerkość kliki, jeśli
-        TODO: cała lista tych 18 xD
+        Spójny graf, który nie posiada grafu rozpinającego będącego kliką.
     \end{proof}
-\end{frame}
+    \begin{examples}
+                \centering
+                \begin{tikzpicture}
+                    % Nodes for K5
+                    \node[draw, circle] (A) at (0,2) {};
+                    \node[draw, circle] (B) at (2,3) {};
+                    \node[draw, circle] (C) at (4,2) {};
+                    \node[draw, circle] (D) at (3,0) {};
+                    \node[draw, circle] (E) at (1,0) {};
+                  
+                    % Additional nodes (outside K5)
+                    \node[draw, circle] (F) at (5,4) {};  % New node connected to C
+                    \node[draw, circle] (G) at (0,-1) {};  % New node connected to E
+                    \node[draw, circle] (H) at (4,-1) {};  % New node connected to D
+                  
+                    % Edges for K5 (fully connected)
+                    \draw[thick] (A) -- (B);
+                    \draw[thick] (A) -- (C);
+                    \draw[thick] (A) -- (D);
+                    \draw[thick] (A) -- (E);
+                    \draw[thick] (B) -- (C);
+                    \draw[thick] (B) -- (D);
+                    \draw[thick] (B) -- (E);
+                    \draw[thick] (C) -- (D);
+                    \draw[thick] (C) -- (E);
+                    \draw[thick] (D) -- (E);
+                  
+                    % Additional edges from K5
+                    \draw[thick] (C) -- (F);  % Edge from C to new node
+                    \draw[thick] (E) -- (G);  % Edge from E to new node
+                    \draw[thick] (D) -- (H);  % Edge from D to new node
+                  \end{tikzpicture}
+                \begin{tikzpicture}
+                    \node[draw, circle] (A) at (0,0) {a};
+                    \node[draw, circle] (B) at (2,0) {b};
+                    \node[draw, circle] (C) at (1,2) {c};
+                    \node[draw, circle] (D) at (3,1) {d};
+                    \node[draw, circle] (E) at (-1,1) {e};
 
-\begin{frame}{Co utrudnia pracę z atomami?}
-    \begin{itemize}
-        \item usuwanie wierchołków
-        \item operacja dopełnienia
-    \end{itemize}
+                    % Edges for the K3 clique (A, B, C)
+                    \draw[thick] (A) -- (B);
+                    \draw[thick] (B) -- (C);
+                    \draw[thick] (C) -- (A);
+
+                    % Additional edges (to show that K3 is not a cut-set)
+                    \draw[thick] (A) -- (E);  % A to E
+                    \draw[thick] (B) -- (D);  % B to D
+                    \draw[thick] (C) -- (D);  % C to D
+                    \draw[thick] (E) -- (C);  % E to C
+                    \draw[thick] (E) -- (D);  % E to C
+                  \end{tikzpicture}
+    \end{examples}
 \end{frame}
 
 \begin{frame}
     \begin{theorem}
-        Klasa atomów $(H_1, H_2)$-wolnych ma ograniczoną szerokość kliki (a klasa grafów $(H_1, H_2)$-wolnych ma ograniczoną szerokość kliki)
+        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki)
+        \begin{figure}[h]
+            \centering
+            \begin{minipage}{0.45\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    % Pierwsza ścieżka P2
+                    \node[draw, circle] (a1) at (0, 0) {};
+                    \node[draw, circle] (a2) at (0, 1.5) {};
+                    \draw (a1) -- (a2);
+                    
+                    % Druga ścieżka P2
+                    \node[draw, circle] (b1) at (1, 0) {};
+                    \node[draw, circle] (b2) at (1, 1.5) {};
+                    \draw (b1) -- (b2);
+                \end{tikzpicture}
+                \caption{$2P_2$} % Podpis bez "Rysunek"
+            \end{minipage}
+            \hfill
+            \begin{minipage}{0.45\textwidth}
+                \centering
+                \begin{tikzpicture}
+                    % Pierwsza ścieżka P2
+                    \node[draw, circle] (a1) at (0, 0) {};
+                    \node[draw, circle] (a2) at (0, 2) {};
+                    
+                    % Druga ścieżka P2
+                    \node[draw, circle] (b1) at (1, 1) {};
+                    \node[draw, circle] (b2) at (2, 0) {};
+                    \node[draw, circle] (b3) at (2, 2) {};
+
+                    \draw (a1) -- (a2);
+                    \draw (a1) -- (b2);
+                    \draw (a2) -- (b3);
+                    \draw (a1) -- (b1);
+                    \draw (b1) -- (b3);
+                    \draw (b1) -- (a2);
+                    \draw (b2) -- (b3);
+                \end{tikzpicture}
+                \caption{$\overline{P_2 + P_3}$} % Podpis bez "Rysunek"
+            \end{minipage}
+        \end{figure}
+    \end{theorem}
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki)
     \end{theorem}
     \begin{proof}
         \renewcommand{\qedsymbol}{}
-        TODO: zrobić ten jebitny dowód xD
+        Podejście opiera się na trzech następujących twierdzeniach:
+        \begin{itemize}
+            \item $(2P_2, \overline{P_2 + P_3})$-wolnych atomów z indukowanym $C_5$ ma ograniczoną szerokość kliki.
+            \item $(2P_2, \overline{P_2 + P_3})$-wolnych atomów z indukowanym $C_4$ ma ograniczoną szerokość kliki.
+            \item $(C_4, C_5, 2P_2, \overline{P_2 + P_3})$-wolnych atomów ma ograniczoną szerokość kliki.
+        \end{itemize}
+    \end{proof}
+\end{frame}
+
+\begin{frame}
+    \begin{lemma}
+        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych atomów z indukowanym $C_5$ ma ograniczoną szerokość kliki.
+    \end{lemma}
+    \begin{proof}
+        Niech $G$ będzie atomem wolnym od $(2P_2, P_2 + P_3)$, który zawiera indukowany cykl $C = v_1, \dots, v_5$. Wprowadzamy następujące oznaczenia: dla $S \subseteq \{1, 2, 3, 4, 5\}$, niech $V_S$ oznacza zbiór wierzchołków $x \in V(G) \setminus V(C)$, takich że $N(x) \cap V(C) = \{v_i \mid i \in S\}$.
+        
+        Rozważamy możliwe wartości $S$.
     \end{proof}
 \end{frame}
 
 \begin{frame}
     \begin{theorem}
-        klasa atomów $2P_2$ i domek ma nieograniczoną szerokość kliki.
+        \renewcommand{\qedsymbol}{}
+        Jeżeli $S = \{i, i+1, i+3\}$, to $V_S$ jest puste dla każdego $i$.
     \end{theorem}
+    \graphBigger
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Zbiory $V_\emptyset$ i $V_{i,i+2}$ dla każdego $i$ są niezależne.
+    \end{theorem}
+    \graphBigger
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i$, $|V_{i,i+1,i+3} \cup V_{i,i+1,i+2,i+3}| \leq 1$.
+    \end{theorem}
+    \graphBigger
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i$ istnieje co najwyżej jedna krawędź między $V_{i,i+2}$ a $V_{i,i-2}$.
+    \end{theorem}
+    \graphBigger
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i$, $V_{i,i+2}$ jest pełne w stosunku do $V_{i-1,i+1} \cup V_{i+1,i+3}$.
+    \end{theorem}
+    \graphBigger
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Jeżeli $x \in V_{1,2,3,4,5}$, to $x$ jest pełne w stosunku do $V(G) \setminus \{x\}$. W szczególności, $V_{1,2,3,4,5}$ jest kliką.
+    \end{theorem}
+    \graphBigger
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Jeżeli $S = \{i, i+1, i+3\}$, to $V_S$ jest puste dla każdego $i$.
+    \end{theorem}
+    \graphBigger
+\end{frame}
+
+\begin{frame}
+    \begin{proof}      
+        Z powyższych twierdzeń wynika, że odpowiednia liczba operacji na $G$ (usunięcia wierzchołków, komplementacje podgrafów, komplementacje dwudzielne) prowadzi do grafu, który ma ograniczoną szerokość kliki.
+        \end{proof}
+\end{frame}
+
+\begin{frame}
+    \begin{lemma}
+        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych atomów z indukowanym $C_4$ ma ograniczoną szerokość kliki.
+    \end{lemma}
     \begin{proof}
         \renewcommand{\qedsymbol}{}
-        TODO: zrobić ten mniej jebitny dowód xD
+        Załóżmy, że $G$ jest atomem wolnym od $(2P_2, P_2 + P_3)$, który zawiera indukowany cykl $C = v_1, v_2, v_3, v_4$. Na mocy wcześniejszego lematu, możemy założyć, że $G$ jest wolny od $C_5$. Dla $S \subseteq \{1, 2, 3, 4\}$, niech $V_S$ oznacza zbiór wierzchołków $x \in V(G) \setminus V(C)$, takich że $N(x) \cap V(C) = \{v_i \mid i \in S\}$.
     \end{proof}
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i$, $V_{i,i+1,i+2}$ jest pusty.
+    \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Zbiór $V_\emptyset \cup V_i \cup V_{i+1} \cup V_{i,i+1}$ jest niezależny dla każdego $i$.
+    \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i$, zbiory $V_{i,i+1} \cup V_{i,i+2}$ i $V_{i,i+1} \cup V_{i+1,i+3}$ są niezależne.
+    \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Graf $G[V_{1,2,3,4}]$ jest wolny od $P_1 + P_2$, a więc ma ograniczoną szerokość kliki.
+        \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i$, $V_{i,i+2}$ jest pełne względem $V_{1,2,3,4}$.
+    \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i$, albo $V_{i-1} \cup V_{i-1,i}$, albo $V_{i,i+1} \cup V_{i+1}$ jest puste.
+    \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Jeżeli $x \in V_\emptyset$, to $x$ ma co najmniej dwóch sąsiadów w jednym z $V_{1,3}$ lub $V_{2,4}$ i jest antykompletny względem drugiego zbioru. Ponadto, $x$ jest pełny względem $V_{1,2,3,4}$.
+    \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i \in \{1, 2\}$, $|V_{i,i+1} \cup V_{i+2,i+3}| \leq 2$.
+    \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{theorem}
+        \renewcommand{\qedsymbol}{}
+        Dla każdego $i \in \{1, 2, 3, 4\}$, $V_i$ jest pełne względem $V_{1,2,3,4}$, a co najwyżej jeden wierzchołek z $V_{i,i+2}$ ma sąsiadów w $V_i$.
+    \end{theorem}
+    \graphSmaller
+\end{frame}
+
+\begin{frame}
+    \begin{proof}     
+        Na podstawie powyższych twierdzeń, odpowiednia liczba operacji (usunięcia wierzchołków, komplementacje podgrafów i komplementacje dwudzielne) prowadzi do grafu o ograniczonej szerokości kliki.
+        \end{proof}
 \end{frame}
 
 \begin{frame}{Lista problemów otwartych}
     \begin{itemize}
-        \item usuwanie wierchołków
-        \item operacja dopełnienia
+        \item item
     \end{itemize}
 \end{frame}
 
-% \begin{frame}{Definicje}
-%     \begin{proof}[Podgraf indukowany]
-%         \renewcommand{\qedsymbol}{}
-%         Od teraz zakładamy że $n \ge 4$.\\
-%         \pause
-%         Załóżmy że jest $n-2$ ochroniarzy. Zacznijmy od ustawienia po ochroniarzu na każdym z liści na $G$.
-%         $G$ może mieć najwyżej $n-2$ liści, gdyż dla $n-1$ liści $\Delta\left(G\right)=n-1$.\\
-%         \pause
-%         Następnie ustawmy resztę ochroniarzy tak, że jest co najwyżej 1 ochroniarz na każdym z wierzchołków.
-%         W takim ustawieniu zostały 2 wierzchołki bez ochroniarzy $x$ i $y$. \\
-%         \pause
-%         Od tego momentu jest 5 przypadków ustawienia prezydenta.
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Definicje}
-%     Celem policjantów jest znalezienie się conajmniej jednego z nich na wierzchołku gdzie przebywa złodziej na końcu swojej tury, 
-%     natomiast złodzieja nie doprowadzić do tej sytuacji.
-%     \pause
-
-%     \textit{Liczba policjantów} grafu $G$ to minimalna wymagana liczba policjantów potrzebnych aby złapać złodzieja w grafie $G$, 
-%     liczbę tę oznacza się przez $c\left(G\right)$.\cite{c_a_r_orig}
-%     \pause
-
-%     \setbeamercovered{transparent}
-%     \begin{examples}        
-%         \begin{figure}
-%             \begin{columns}[t]
-%                 \column{.2\textwidth}
-%                     \centering
-%                     \onslide<3>{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,0) {1};
-%                             \node[vertex] (v2) at (0,1) {2};
-%                             \node[rob_vertex] (v3) at (0,2) {3};
-
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                         \end{tikzpicture}
-%                         \caption{$c\left(G\right) = 1$}
-%                     }
-%                 \column{.35\textwidth}
-%                     \centering
-%                     \onslide<4>{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,1) {1};
-%                             \node[vertex] (v2) at (1,0) {2};
-%                             \node[vertex] (v3) at (2,0) {3};
-%                             \node[vertex] (v4) at (3,1) {4};
-%                             \node[rob_vertex] (v5) at (2,2) {5};
-%                             \node[vertex] (v6) at (1,2) {6};
-                            
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v5)--(v6);
-%                             \draw[edge] (v6)--(v1);
-%                         \end{tikzpicture}
-%                         \caption{$c\left(G\right) = 2$}
-%                     }
-%                 \column{.45\textwidth}
-%                     \centering
-%                     \onslide<5>{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,1) {1};
-%                             \node[vertex] (v2) at (1,0) {2};
-%                             \node[cop_vertex] (v3) at (3,0) {3};
-%                             \node[vertex] (v4) at (4,1) {4};
-%                             \node[rob_vertex] (v5) at (3,2) {5};
-%                             \node[vertex] (v6) at (1,2) {6};
-%                             \node[vertex] (v7) at (2,1) {7};
-                            
-%                             \draw[edge] (v1)--(v7);
-%                             \draw[edge] (v2)--(v7);
-%                             \draw[edge] (v3)--(v7);
-%                             \draw[edge] (v4)--(v7);
-%                             \draw[edge] (v5)--(v7);
-%                             \draw[edge] (v6)--(v7);
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v5)--(v6);
-%                             \draw[edge] (v6)--(v1);
-%                         \end{tikzpicture}
-%                         \caption{$c\left(G\right) = 1$}
-%                     }
-%             \end{columns}
-%         \end{figure}      
-%     \end{examples}
-% \end{frame}
-
-% \setbeamercovered{invisible}
-% \begin{frame}{Policjanci okrążający złodzieja}
-%     Wariacją na temat policjantów i złodzieja są policjanci okrążający złodzieja.\cite{c_s_r}
-%     Zmiany wzgędem oryginału są następujące:
-%     \pause
-%     \begin{enumerate}[<+->]
-%         \item policjanci wygrywają w momencie okrążenia złodzieja w skończonej liczbie ruchów, 
-%         czyli kiedy znajdują się na każdym wierzchołku połączonym krawędzią z wierzchołkiem na którym aktualnie jest złodziej.
-%         \item Złodziej nie przegrywa, kiedy znajdzie się na tym samym wierzchołku co jeden z policjantów.
-%         \item Złodziej nie może wejść na wierzchołek okupowany przez policjanta.
-%         \item Jeżeli złodziej będzie na tym samym wierzchołku co policjant, 
-%         musi w swoim ruchu przejść na wierzchołek na którym nie znajduje się policjant
-%     \end{enumerate}
-%     \pause
-%     Analogicznie do $c\left(G\right)$ w tej wariacji stosuje się $\sigma\left(G\right)$ oznaczające \textit{liczbę policjantów wymaganych do okrążenia złodzieja w grafie $G$}.
-% \end{frame}
-
-% \setbeamercovered{transparent}
-
-% \begin{frame}{Policjanci okrążający złodzieja}
-%     \begin{examples}        
-%         \begin{figure}
-%             \begin{columns}[t]
-%                 \column{.2\textwidth}
-%                     \centering
-%                     \onslide<1>{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,0) {1};
-%                             \node[vertex] (v2) at (0,1) {2};
-%                             \node[rob_vertex] (v3) at (0,2) {3};
-
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                         \end{tikzpicture}
-%                         \caption{$c\left(G\right) = 1$, $\sigma\left(G\right) = 1$}
-%                     }
-%                 \column{.35\textwidth}
-%                     \centering
-%                     \onslide<2>{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,1) {1};
-%                             \node[vertex] (v2) at (1,0) {2};
-%                             \node[vertex] (v3) at (2,0) {3};
-%                             \node[vertex] (v4) at (3,1) {4};
-%                             \node[rob_vertex] (v5) at (2,2) {5};
-%                             \node[vertex] (v6) at (1,2) {6};
-                            
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v5)--(v6);
-%                             \draw[edge] (v6)--(v1);
-%                         \end{tikzpicture}
-%                         \caption{$c\left(G\right) = 2$, $\sigma\left(G\right) = 2$}
-%                     }
-%                 \column{.45\textwidth}
-%                     \centering
-%                     \onslide<3>{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,1) {1};
-%                             \node[vertex] (v2) at (1,0) {2};
-%                             \node[cop_vertex] (v3) at (3,0) {3};
-%                             \node[vertex] (v4) at (4,1) {4};
-%                             \node[rob_vertex] (v5) at (3,2) {5};
-%                             \node[vertex] (v6) at (1,2) {6};
-%                             \node[vertex] (v7) at (2,1) {7};
-                            
-%                             \draw[edge] (v1)--(v7);
-%                             \draw[edge] (v2)--(v7);
-%                             \draw[edge] (v3)--(v7);
-%                             \draw[edge] (v4)--(v7);
-%                             \draw[edge] (v5)--(v7);
-%                             \draw[edge] (v6)--(v7);
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v5)--(v6);
-%                             \draw[edge] (v6)--(v1);
-%                         \end{tikzpicture}
-%                         \caption{$c\left(G\right) = 1$, $\sigma\left(G\right) = 3$}
-%                     }
-%             \end{columns}
-%         \end{figure}   
-%     \end{examples}
-% \end{frame}
-% \setbeamercovered{invisible}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     Wariacją na temat policjantów okrążających złodzieja są ochroniarze i prezydent.\cite{b_s_p}
-%     Zmiany wzgędem poprzednika są następujące:
-%     \pause
-%     \begin{enumerate}[<+->]
-%         \item policjanci to ochroniarze, złodziej to prezydent.
-%         \item Ochroniarze wygrywają w momencie okrążenia prezydenta w skończonej liczbie ruchów i
-%          utrzymaniu tego stanu na końcu każdej kolejnej swojej tury. 
-%         \item Prezydent może wejść na wierzchołek okupowany przez ochroniarza.
-%         \item Ochroniarzy może być $0$. Taka sytuacja występuje tylko w grafie pustym.
-%     \end{enumerate}
-
-%     \pause
-%     Analogicznie do $\sigma\left(G\right)$ w tej wariacji stosuje się $B\left(G\right)$ oznaczające 
-%     \textit{liczbę ochroniarzy wymaganych do okrążenia prezydanta i spełnienia warunków wygranej w grafie $G$}.
-%  \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     Ciekawostka, zmiana nazwy drużyn w artykule wynika z zachowania jakie się wytwarzają podczas przebiegu gry.
-%     Zachowanie ochroniarzy (dawniej policjantów) bardziej przypomina próbę otoczenia/ochrony ważnej osobistości,
-%     poprzez ciągłe obsadzenie wszelkich dróg dojścia do tej osobistości 
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     Dla grafu $G$ o $n$ wierzchołkach $B\left(G\right) = n-1$.
-%     W takiej sytuacji przy rozstawianiu ochroniarze już okupują $n-1$ wierzołków. 
-%     Prezydent ma wtedy dwie opcje, wybrać wierzchołek z ochroniarzem\dots \onslide<3->{lub bez.}
-%     \begin{figure}
-%         \begin{columns}[t]
-%             \column{.5\textwidth}
-%                 \centering
-%                 \onslide<1->{
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[cop_vertex] (v4) at (4,1) {4};
-%                         \node[cop_rob_vertex] (v5) at (3,2) {5};
-%                         \node[vertex] (v6) at (1,2) {6};
-                        
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v1)--(v3);
-%                         \draw[edge] (v1)--(v4);
-%                         \draw[edge] (v1)--(v5);
-%                         \draw[edge] (v1)--(v6);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v2)--(v4);
-%                         \draw[edge] (v2)--(v5);
-%                         \draw[edge] (v2)--(v6);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v3)--(v5);
-%                         \draw[edge] (v3)--(v6);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v4)--(v6);
-%                         \draw[edge] (v5)--(v6);
-%                     \end{tikzpicture}
-%                     \caption{Prezydent zaczynający na wierzchołku ochroniarza (kolor zielony)}
-%                 }
-%                 \column{.5\textwidth}
-%                 \centering
-%                 \onslide<2->{
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[cop_vertex] (v4) at (4,1) {4};
-%                         \node[rob_vertex] (v5) at (3,2) {5};
-%                         \node[cop_vertex] (v6) at (1,2) {6};
-                        
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v1)--(v3);
-%                         \draw[edge] (v1)--(v4);
-%                         \draw[edge] (v1)--(v5);
-%                         \draw[edge] (v1)--(v6);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v2)--(v4);
-%                         \draw[edge] (v2)--(v5);
-%                         \draw[edge] (v2)--(v6);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v3)--(v5);
-%                         \draw[edge] (v3)--(v6);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v4)--(v6);
-%                         \draw[edge] (v5)--(v6);
-%                     \end{tikzpicture}
-%                     \caption{Po pierwszym ruchu ochroniarzy}
-%                 }
-%         \end{columns}
-%     \end{figure}  
-%     \onslide<4>{Jak widać po powyższym przykładzie, grę można podzielić na 2 fazy, okrążenia i utrzymania okrążenia}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{lemma}
-%         Dla każdego grafu $G$, $B\left(G\right)\ge \Delta\left(G\right)$.
-%     \end{lemma}
-%     \pause
-%     \begin{proof}
-%         Jeżeli prezydent stoi na wierzchołku o największym stopniu,
-%         ochroniarze nie mogą wygrać nie okrążając prezydenta na tym wierzchołku.
-%     \end{proof}
-%     \begin{examples}<3>
-%         \begin{columns}[t]
-%             \column{.2\textwidth}
-%                 \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,0) {1};
-%                         \node[rob_vertex] (v2) at (0,1) {2};
-%                         \node[vertex] (v3) at (0,2) {3};
-
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                     \end{tikzpicture}
-%             \column{.5\textwidth}
-%                 \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[cop_vertex] (v4) at (4,1) {4};
-%                         \node[cop_vertex] (v5) at (3,2) {5};
-%                         \node[cop_vertex] (v6) at (1,2) {6};
-%                         \node[rob_vertex] (v7) at (2,1) {7};
-%                         \node[vertex] (v8) at (2,2) {8};
-                        
-%                         \draw[edge] (v1)--(v7);
-%                         \draw[edge] (v2)--(v7);
-%                         \draw[edge] (v3)--(v7);
-%                         \draw[edge] (v4)--(v7);
-%                         \draw[edge] (v5)--(v7);
-%                         \draw[edge] (v6)--(v7);
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v5)--(v8);
-%                         \draw[edge] (v6)--(v8);
-%                         \draw[edge] (v6)--(v1);
-%                     \end{tikzpicture}
-%         \end{columns}
-%     \end{examples}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{lemma}
-%         Dla każdego grafu $G$, $B\left(G\right)\ge \Delta\left(G\right)$.
-%         \label{lem_B_ge_Delta}
-%     \end{lemma}
-%     \begin{examples}
-%         \begin{columns}[t]
-%             \column{.5\textwidth}
-%                 \centering
-%                 \begin{tikzpicture}
-%                     \node[cop_vertex] (v1) at (0,1) {1};
-%                     \node[cop_vertex] (v2) at (1,0) {2};
-%                     \node[cop_vertex] (v3) at (3,0) {3};
-%                     \node[cop_vertex] (v4) at (4,1) {4};
-%                     \node[cop_vertex] (v5) at (3,2) {5};
-%                     \node[cop_vertex] (v6) at (1,2) {6};
-%                     \node[rob_vertex] (v7) at (2,1) {7};
-%                     \node[vertex] (v8) at (5,2) {8};
-%                     \node[vertex] (v9) at (5,0) {9};
-                    
-%                     \draw[edge] (v1)--(v7);
-%                     \draw[edge] (v2)--(v7);
-%                     \draw[edge] (v3)--(v7);
-%                     \draw[edge] (v4)--(v7);
-%                     \draw[edge] (v5)--(v7);
-%                     \draw[edge] (v6)--(v7);
-%                     \draw[edge] (v1)--(v2);
-%                     \draw[edge] (v2)--(v3);
-%                     \draw[edge] (v3)--(v4);
-%                     \draw[edge] (v4)--(v5);
-%                     \draw[edge] (v5)--(v6);
-%                     \draw[edge] (v6)--(v1);
-%                     \draw[edge] (v4)--(v8);
-%                     \draw[edge] (v4)--(v9);
-%                     \draw[edge] (v8)--(v9);
-%                 \end{tikzpicture}
-%             \column{.5\textwidth}
-%                 \centering
-%                 \begin{tikzpicture}
-%                     \node[vertex] (v1) at (0,1) {1};
-%                     \node[cop_vertex] (v2) at (1,0) {2};
-%                     \node[cop_vertex] (v3) at (3,0) {3};
-%                     \node[cop_rob_vertex] (v4) at (4,1) {4};
-%                     \node[cop_vertex] (v5) at (3,2) {5};
-%                     \node[cop_vertex] (v6) at (1,2) {6};
-%                     \node[cop_vertex] (v7) at (2,1) {7};
-%                     \node[cop_vertex] (v8) at (5,2) {8};
-%                     \node[vertex] (v9) at (5,0) {9};
-                    
-%                     \draw[edge] (v1)--(v7);
-%                     \draw[edge] (v2)--(v7);
-%                     \draw[edge] (v3)--(v7);
-%                     \draw[edge] (v4)--(v7);
-%                     \draw[edge] (v5)--(v7);
-%                     \draw[edge] (v6)--(v7);
-%                     \draw[edge] (v1)--(v2);
-%                     \draw[edge] (v2)--(v3);
-%                     \draw[edge] (v3)--(v4);
-%                     \draw[edge] (v4)--(v5);
-%                     \draw[edge] (v5)--(v6);
-%                     \draw[edge] (v6)--(v1);
-%                     \draw[edge] (v4)--(v8);
-%                     \draw[edge] (v4)--(v9);
-%                     \draw[edge] (v8)--(v9);
-%                 \end{tikzpicture}
-%         \end{columns}
-%     \end{examples}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{theorem}
-%         Dla każdego grafu $G$ na n wierzchołkach, 
-%         $B\left(G\right) = n-1$ wtedy i tylko wtedy, gdy $\Delta\left(G\right) = n-1$. 
-%     \end{theorem}
-%     \begin{examples}
-%         \begin{columns}[t]
-%             \column{.5\textwidth}
-%                 \centering
-%                 \begin{tikzpicture}
-%                     \node[vertex] (v1) at (0,1) {1};
-%                     \node[vertex] (v2) at (1,0) {2};
-%                     \node[vertex] (v3) at (2,0) {3};
-%                     \node[vertex] (v4) at (3,0) {4};
-%                     \node[vertex] (v5) at (4,1) {5};
-%                     \node[vertex] (v6) at (3,2) {6};
-%                     \node[vertex] (v7) at (2,2) {7};
-%                     \node[vertex] (v8) at (1,2) {8};
-%                     \node[vertex] (v9) at (2,1) {9};
-                    
-%                     \draw[edge] (v1)--(v9);
-%                     \draw[edge] (v2)--(v9);
-%                     \draw[edge] (v3)--(v9);
-%                     \draw[edge] (v4)--(v9);
-%                     \draw[edge] (v5)--(v9);
-%                     \draw[edge] (v6)--(v9);
-%                     \draw[edge] (v7)--(v9);
-%                     \draw[edge] (v8)--(v9);
-%                     \draw[edge] (v1)--(v2);
-%                     \draw[edge] (v2)--(v3);
-%                     \draw[edge] (v3)--(v4);
-%                     \draw[edge] (v5)--(v6);
-%                     \draw[edge] (v6)--(v7);
-%                     \draw[edge] (v7)--(v8);
-%                 \end{tikzpicture}
-%             \column{.5\textwidth}
-%                 \centering
-%                 \begin{tikzpicture}
-%                     \node[vertex] (v1) at (0,1) {1};
-%                     \node[vertex] (v2) at (1,0) {2};
-%                     \node[vertex] (v3) at (3,0) {3};
-%                     \node[vertex] (v4) at (4,1) {4};
-%                     \node[vertex] (v5) at (3,2) {5};
-%                     \node[vertex] (v6) at (1,2) {6};
-                    
-%                     \draw[edge] (v1)--(v2);
-%                     \draw[edge] (v1)--(v3);
-%                     \draw[edge] (v1)--(v4);
-%                     \draw[edge] (v1)--(v5);
-%                     \draw[edge] (v1)--(v6);
-%                     \draw[edge] (v2)--(v3);
-%                     \draw[edge] (v2)--(v4);
-%                     \draw[edge] (v2)--(v5);
-%                     \draw[edge] (v2)--(v6);
-%                     \draw[edge] (v3)--(v4);
-%                     \draw[edge] (v3)--(v5);
-%                     \draw[edge] (v3)--(v6);
-%                     \draw[edge] (v4)--(v5);
-%                     \draw[edge] (v4)--(v6);
-%                     \draw[edge] (v5)--(v6);
-%                 \end{tikzpicture}
-%         \end{columns}
-%     \end{examples}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}
-%         \renewcommand{\qedsymbol}{}
-%         Jeżeli $\Delta\left(G\right)=n-1$ to z lematu $B\left(G\right)\ge \Delta\left(G\right)$ oraz $B\left(G\right) = n-1$, 
-%         to $B\left(G\right)=n-1$.
-%         \pause
-
-%         Załóżmy że $\Delta\left(G\right) < n-1$.\\
-%         \pause
-%         Dla $n\le3$ $G$ jest izomorficzne do $E_n$, $P_2$, $P_3$ albo $C_3$. $B\left(E_n\right) = 0$, gdyż wierzchołki nie są połączone.
-%         Można łatwo zauważyć, że $B\left(P_2\right) = 1$, $B\left(P_3\right) = B\left(C_3\right) = 2$. 
-%         \pause
-%         \begin{examples}
-%             \begin{columns}[t]
-%                 \column{.2\textwidth}
-%                     \centering
-%                     \begin{figure}    
-%                         \begin{tikzpicture}
-%                             \node[vertex] (v1) at (0,0) {1};
-%                             \node[vertex] (v2) at (1,1) {2};
-%                             \node[rob_vertex] (v3) at (0, 1) {3};
-%                         \end{tikzpicture}
-%                         \caption{$E_n$}
-%                     \end{figure}    
-%                 \column{.2\textwidth}
-%                     \centering
-%                     \begin{figure}    
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,0) {1};
-%                             \node[rob_vertex] (v2) at (1,1) {2};
-                                
-%                             \draw[edge] (v1)--(v2);
-%                         \end{tikzpicture}
-%                         \caption{$P_2$}
-%                     \end{figure}    
-%                 \column{.2\textwidth}
-%                     \centering
-%                     \begin{figure}    
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,0) {1};
-%                             \node[rob_vertex] (v2) at (1,0) {2};
-%                             \node[cop_vertex] (v3) at (1,1) {3};
-                                
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                         \end{tikzpicture}
-%                         \caption{$P_3$}
-%                     \end{figure}    
-%                 \column{.2\textwidth}
-%                     \centering
-%                     \begin{figure}    
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,0) {1};
-%                             \node[rob_vertex] (v2) at (1,0) {2};
-%                             \node[cop_vertex] (v3) at (1,1) {3};
-                                
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v1)--(v3);
-%                         \end{tikzpicture}
-%                         \caption{$C_3$}
-%                     \end{figure}    
-%             \end{columns}
-%         \end{examples}
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd.]
-%         \renewcommand{\qedsymbol}{}
-%         Od teraz zakładamy że $n \ge 4$.\\
-%         \pause
-%         Załóżmy że jest $n-2$ ochroniarzy. Zacznijmy od ustawienia po ochroniarzu na każdym z liści na $G$.
-%         $G$ może mieć najwyżej $n-2$ liści, gdyż dla $n-1$ liści $\Delta\left(G\right)=n-1$.\\
-%         \pause
-%         Następnie ustawmy resztę ochroniarzy tak, że jest co najwyżej 1 ochroniarz na każdym z wierzchołków.
-%         W takim ustawieniu zostały 2 wierzchołki bez ochroniarzy $x$ i $y$. \\
-%         \pause
-%         Od tego momentu jest 5 przypadków ustawienia prezydenta.
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd. Przypadek 1.]
-%         \renewcommand{\qedsymbol}{}
-%         Prezydent jest na wierzchołku otoczonym przez ochroniarzy. Jest to docelowa sytuacja ochroniarzy, w pierwszym ruchu każdy zostanie na swojej pozycji.
-%         \begin{example}
-%             \begin{columns}[t]
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[cop_vertex] (v4) at (4,1) {4};
-%                         \node[cop_vertex] (v5) at (3,2) {5};
-%                         \node[cop_vertex] (v6) at (1,2) {6};
-%                         \node[rob_vertex] (v7) at (2,1) {7 $y$};
-%                         \node[cop_vertex] (v8) at (5,2) {8};
-%                         \node[vertex] (v9) at (5,0) {9 $x$};
-                        
-%                         \draw[edge] (v1)--(v7);
-%                         \draw[edge] (v2)--(v7);
-%                         \draw[edge] (v3)--(v7);
-%                         \draw[edge] (v4)--(v7);
-%                         \draw[edge] (v5)--(v7);
-%                         \draw[edge] (v6)--(v7);
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v5)--(v6);
-%                         \draw[edge] (v6)--(v1);
-%                         \draw[edge] (v4)--(v8);
-%                         \draw[edge] (v4)--(v9);
-%                         \draw[edge] (v8)--(v9);
-%                     \end{tikzpicture}
-%             \end{columns}
-%         \end{example}
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd. Przypadek 2.]
-%         \renewcommand{\qedsymbol}{}
-%         Prezydent jest na wierzchołku z ochroniarzem oraz jest otoczona przez ochroniarzy.
-%         \onslide<2->{
-%         W takiej sytuacji istanieje ścieżka $v_1, v_2,\dots,v_n$ w $G$, że $v_1$ jest okupowane przez prezydenta, a $v_n = x$.
-%         Niech $b_i$ oznacza ochroniarza na $v_i$. Podczas pierwszej tury ochroniarzy, ochroniarze $b_i$ dla $1\le i \le n-1$ przejdą z $v_i$ na $v_{i+1}$.
-%         }
-%         \onslide<3->{
-%         Wynikiem tego działania jest otoczenie prezydenta bez ochroniarza na jej wierzchołka.
-%         }
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[cop_vertex] (v4) at (4,1) {4};
-%                         \node[cop_vertex] (v5) at (3,2) {5};
-%                         \node[cop_vertex] (v6) at (1,2) {6};
-%                         \node[cop_rob_vertex] (v7) at (2,1) {7};
-%                         \node[vertex] (v8) at (5,2) {8 $x$};
-%                         \node[vertex] (v9) at (5,0) {9 $y$};
-                        
-%                         \draw[edge] (v1)--(v7);
-%                         \draw[edge] (v2)--(v7);
-%                         \draw[edge] (v3)--(v7);
-%                         \draw[edge] (v4)--(v7);
-%                         \draw[edge] (v5)--(v7);
-%                         \draw[edge] (v6)--(v7);
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v5)--(v6);
-%                         \draw[edge] (v6)--(v1);
-%                         \draw[edge] (v4)--(v8);
-%                         \draw[edge] (v4)--(v9);
-%                         \draw[edge] (v8)--(v9);
-%                     \end{tikzpicture}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \onslide<2->{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,1) {1};
-%                             \node[cop_vertex] (v2) at (1,0) {2};
-%                             \node[cop_vertex] (v3) at (3,0) {3};
-%                             \node[cop_vertex] (v4) at (4,1) {4};
-%                             \node[cop_vertex] (v5) at (3,2) {5};
-%                             \node[cop_vertex] (v6) at (1,2) {6};
-%                             \node[rob_vertex] (v7) at (2,1) {7};
-%                             \node[cop_vertex] (v8) at (5,2) {8 $x$};
-%                             \node[vertex] (v9) at (5,0) {9 $y$};
-                            
-%                             \draw[edge] (v1)--(v7);
-%                             \draw[edge] (v2)--(v7);
-%                             \draw[edge] (v3)--(v7);
-%                             \draw[edge] (v4)--(v7);
-%                             \draw[edge] (v5)--(v7);
-%                             \draw[edge] (v6)--(v7);
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v5)--(v6);
-%                             \draw[edge] (v6)--(v1);
-%                             \draw[edge] (v4)--(v8);
-%                             \draw[edge] (v4)--(v9);
-%                             \draw[edge] (v8)--(v9);
-%                         \end{tikzpicture}
-%                     }
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd. Przypadek 3.]
-%         \renewcommand{\qedsymbol}{}
-%         Prezydent jest na wierzchołku z ochroniarzem oraz jeden z sąsiadujących wierzchołków nie ma ochroniarza. Bez straty ogólności załóżmy że ten wierzchołek to $x$.
-%         \onslide<2->{
-%         W takiej sytuacji ochroniarz znajdujący się na wierzchołku prezydenta przejdzie się na wierzchołek $x$. 
-%         }
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[vertex] (v4) at (4,1) {4 $x$};
-%                         \node[cop_vertex] (v5) at (3,2) {5};
-%                         \node[cop_vertex] (v6) at (1,2) {6};
-%                         \node[cop_rob_vertex] (v7) at (2,1) {7};
-%                         \node[cop_vertex] (v8) at (5,2) {8};
-%                         \node[vertex] (v9) at (5,0) {9 $y$};
-                        
-%                         \draw[edge] (v1)--(v7);
-%                         \draw[edge] (v2)--(v7);
-%                         \draw[edge] (v3)--(v7);
-%                         \draw[edge] (v4)--(v7);
-%                         \draw[edge] (v5)--(v7);
-%                         \draw[edge] (v6)--(v7);
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v5)--(v6);
-%                         \draw[edge] (v6)--(v1);
-%                         \draw[edge] (v4)--(v8);
-%                         \draw[edge] (v4)--(v9);
-%                         \draw[edge] (v8)--(v9);
-%                     \end{tikzpicture}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \onslide<2->{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,1) {1};
-%                             \node[cop_vertex] (v2) at (1,0) {2};
-%                             \node[cop_vertex] (v3) at (3,0) {3};
-%                             \node[cop_vertex] (v4) at (4,1) {4 $x$};
-%                             \node[cop_vertex] (v5) at (3,2) {5};
-%                             \node[cop_vertex] (v6) at (1,2) {6};
-%                             \node[rob_vertex] (v7) at (2,1) {7};
-%                             \node[cop_vertex] (v8) at (5,2) {8};
-%                             \node[vertex] (v9) at (5,0) {9 $y$};
-                            
-%                             \draw[edge] (v1)--(v7);
-%                             \draw[edge] (v2)--(v7);
-%                             \draw[edge] (v3)--(v7);
-%                             \draw[edge] (v4)--(v7);
-%                             \draw[edge] (v5)--(v7);
-%                             \draw[edge] (v6)--(v7);
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v5)--(v6);
-%                             \draw[edge] (v6)--(v1);
-%                             \draw[edge] (v4)--(v8);
-%                             \draw[edge] (v4)--(v9);
-%                             \draw[edge] (v8)--(v9);
-%                         \end{tikzpicture}
-%                     }
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd. Przypadek 4.]
-%         \renewcommand{\qedsymbol}{}
-%         Prezydent jest na wierzchołku bez ochroniarzem oraz jeden z sąsiadujących wierzchołków nie ma ochroniarza. Bez straty ogólności załóżmy że prezydent jest na $x$ i sąsiaduje z $y$.
-%         Ponieważ $y$ nie jest liściem, istnieje wierzchołek $y\prime$ mający ochroniarza oraz sąsiadujący z $y$.  
-%         \onslide<3>{
-%             W pierwszej turze ochroniarzy, ochroniarz z $y\prime$ przejdzie na $y$ co skutkuje okrążeniem prezydenta\dots
-%         }
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[vertex] (v4) at (4,1) {4 $y$};
-%                         \node[cop_vertex] (v5) at (3,2) {5};
-%                         \node[cop_vertex] (v6) at (1,2) {6};
-%                         \node[rob_vertex] (v7) at (2,1) {7 $x$};
-%                         \node[cop_vertex] (v8) at (5,2) {8};
-%                         \node[cop_vertex] (v9) at (5,0) {9 $y\prime$};
-                        
-%                         \draw[edge] (v1)--(v7);
-%                         \draw[edge] (v2)--(v7);
-%                         \draw[edge] (v3)--(v7);
-%                         \draw[edge] (v4)--(v7);
-%                         \draw[edge] (v5)--(v7);
-%                         \draw[edge] (v6)--(v7);
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v5)--(v6);
-%                         \draw[edge] (v6)--(v1);
-%                         \draw[edge] (v4)--(v8);
-%                         \draw[edge] (v4)--(v9);
-%                         \draw[edge] (v8)--(v9);
-%                     \end{tikzpicture}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \onslide<2->{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,1) {1};
-%                             \node[cop_vertex] (v2) at (1,0) {2};
-%                             \node[cop_vertex] (v3) at (3,0) {3};
-%                             \node[cop_vertex] (v4) at (4,1) {4 $y$};
-%                             \node[cop_vertex] (v5) at (3,2) {5};
-%                             \node[cop_vertex] (v6) at (1,2) {6};
-%                             \node[rob_vertex] (v7) at (2,1) {7 $x$};
-%                             \node[cop_vertex] (v8) at (5,2) {8};
-%                             \node[vertex] (v9) at (5,0) {9 $y\prime$};
-                            
-%                             \draw[edge] (v1)--(v7);
-%                             \draw[edge] (v2)--(v7);
-%                             \draw[edge] (v3)--(v7);
-%                             \draw[edge] (v4)--(v7);
-%                             \draw[edge] (v5)--(v7);
-%                             \draw[edge] (v6)--(v7);
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v5)--(v6);
-%                             \draw[edge] (v6)--(v1);
-%                             \draw[edge] (v4)--(v8);
-%                             \draw[edge] (v4)--(v9);
-%                             \draw[edge] (v8)--(v9);
-%                         \end{tikzpicture}
-%                     }
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd. Przypadek 4.]
-%         \renewcommand{\qedsymbol}{}
-%         Prezydent jest na wierzchołku bez ochroniarzem oraz jeden z sąsiadujących wierzchołków nie ma ochroniarza. Bez straty ogólności załóżmy że prezydent jest na $x$ i sąsiaduje z $y$.
-%         Ponieważ $y$ nie jest liściem, istnieje wierzchołek $y\prime$ mający ochroniarza oraz sąsiadujący z $y$.  
-%         W pierwszej turze ochroniarzy, ochroniarz z $y\prime$ przejdzie na $y$ co skutkuje okrążeniem prezydenta\dots\textcolor{red}{ choć znalazłem inny przypadek}.
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[vertex] (v4) at (4,1) {4 $y$};
-%                         \node[cop_vertex] (v5) at (3,2) {5};
-%                         \node[cop_vertex] (v6) at (1,2) {6};
-%                         \node[rob_vertex] (v7) at (2,1) {7 $x$};
-%                         \node[cop_vertex] (v8) at (5,2) {8};
-%                         \node[cop_vertex] (v9) at (5,0) {9 $y\prime$};
-                        
-%                         \draw[edge] (v1)--(v7);
-%                         \draw[edge] (v2)--(v7);
-%                         \draw[edge] (v3)--(v7);
-%                         \draw[edge] (v4)--(v7);
-%                         \draw[edge] (v5)--(v7);
-%                         \draw[edge] (v6)--(v7);
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v5)--(v6);
-%                         \draw[edge] (v6)--(v1);
-%                         \draw[edge] (v4)--(v8);
-%                         \draw[edge] (v4)--(v9);
-%                         \draw[edge] (v8)--(v9);
-%                     \end{tikzpicture}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (1,0) {1};
-%                         \node[cop_vertex] (v2) at (1,1) {2};
-%                         \node[rob_vertex] (v3) at (1,2) {3 $x$};
-%                         \node[vertex] (v4) at (0,2.5) {4 $y$};
-%                         \node[cop_vertex] (v5) at (2,2.5) {5 $y\prime$};
-                        
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v3)--(v5);
-%                     \end{tikzpicture}
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd. Przypadek 5.1]
-%         \renewcommand{\qedsymbol}{}
-%         Prezydent jest na wierzchołku z ochroniarzem oraz oba z sąsiadujących wierzchołków nie mają ochroniarza. 
-%         Załóżmy że $y$ ma połączenie z $z$ gdzie $z\ne x$ i nie jest to wierzchołek prezydenta.
-%         \onslide<2->{
-%             W takiej sytuacji ochroniarz na wierzchołku prezydenta może przejść na wierzchołek $x$, 
-%             a wierzchołek $y$ można obstawić według strategii z przypadku 4.
-%         }
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,1) {1};
-%                         \node[cop_vertex] (v2) at (1,0) {2};
-%                         \node[cop_vertex] (v3) at (3,0) {3};
-%                         \node[vertex] (v4) at (4,1) {4 $y$};
-%                         \node[vertex] (v5) at (3,2) {5 $x$};
-%                         \node[cop_vertex] (v6) at (1,2) {6};
-%                         \node[cop_rob_vertex] (v7) at (2,1) {7};
-%                         \node[cop_vertex] (v8) at (5,2) {8 $z$};
-%                         \node[cop_vertex] (v9) at (5,0) {9};
-                        
-%                         \draw[edge] (v1)--(v7);
-%                         \draw[edge] (v2)--(v7);
-%                         \draw[edge] (v3)--(v7);
-%                         \draw[edge] (v4)--(v7);
-%                         \draw[edge] (v5)--(v7);
-%                         \draw[edge] (v6)--(v7);
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v5)--(v6);
-%                         \draw[edge] (v6)--(v1);
-%                         \draw[edge] (v4)--(v8);
-%                         \draw[edge] (v4)--(v9);
-%                         \draw[edge] (v8)--(v9);
-%                     \end{tikzpicture}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \onslide<2->{
-%                         \begin{tikzpicture}
-%                             \node[cop_vertex] (v1) at (0,1) {1};
-%                             \node[cop_vertex] (v2) at (1,0) {2};
-%                             \node[cop_vertex] (v3) at (3,0) {3};
-%                             \node[cop_vertex] (v4) at (4,1) {4 $y$};
-%                             \node[cop_vertex] (v5) at (3,2) {5 $x$};
-%                             \node[cop_vertex] (v6) at (1,2) {6};
-%                             \node[rob_vertex] (v7) at (2,1) {7};
-%                             \node[vertex] (v8) at (5,2) {8 $z$};
-%                             \node[cop_vertex] (v9) at (5,0) {9};
-                            
-%                             \draw[edge] (v1)--(v7);
-%                             \draw[edge] (v2)--(v7);
-%                             \draw[edge] (v3)--(v7);
-%                             \draw[edge] (v4)--(v7);
-%                             \draw[edge] (v5)--(v7);
-%                             \draw[edge] (v6)--(v7);
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v5)--(v6);
-%                             \draw[edge] (v6)--(v1);
-%                             \draw[edge] (v4)--(v8);
-%                             \draw[edge] (v4)--(v9);
-%                             \draw[edge] (v8)--(v9);
-%                         \end{tikzpicture}
-%                     }
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd. Przypadek 5.2]
-%         \renewcommand{\qedsymbol}{}
-%         Prezydent jest na wierzchołku z ochroniarzem oraz oba z sąsiadujących wierzchołków nie mają ochroniarza. 
-%         Załóżmy że $x$ ma tylko połączenie do $y$ i do prezydenta, a $y$ ma połączenie tylko do $x$ i do prezydenta. 
-%         Wierzchołek prezydenta oznaczamy $v_p$.
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,0.5) {1};
-%                         \node[cop_vertex] (v2) at (1,0.5) {2};
-%                         \node[cop_rob_vertex] (v3) at (2,0.5) {3 $v_p$};
-%                         \node[vertex] (v4) at (3,0) {4 $y$};
-%                         \node[vertex] (v5) at (3,1) {5 $x$};
-                        
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v3)--(v5);
-%                     \end{tikzpicture}
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd. Przypadek 5.2 cd]
-%         \renewcommand{\qedsymbol}{}
-%         Niech $\alpha_1\notin N\left[v_p\right]$ i 
-%         $\alpha_1, \alpha_2,\dots, \alpha_{k-2}, v_p=\alpha_{k-1}, x=\alpha_k$ będzie ścieżką zawierającą $v_p$.
-%         \onslide<2->{
-%             Niech $b_i$ oznacza ochroniarza na $\alpha_i$ dla $1\le i\le k-1$. 
-%             W pierwszej turze ochroniarz $b_i$ przejdzie z $\alpha_i$ na $\alpha_{i+1}$. 
-%             W rezultacie $v_p$ i $x$ mają ochroniarza, a $\alpha_1$ i $y$ nie. 
-%         }
-%         \onslide<3->{
-%             W takiej sytuacji prezydent może wybrać pozycję $v_p$, $x$, lub $y$, co skutkuje okrążeniem, albo przypadkiem 3.
-%             Jeżeli prezydent wybierze inny wierzchołek, to albo będzie okrążony, albo będzie sąsiadował z $\alpha_1$, skąd można przejść do przypadku 2 albo 3.
-%         }
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[cop_vertex] (v1) at (0,0.5) {1 $\alpha_1$};
-%                         \node[cop_vertex] (v2) at (1,0.5) {2 $\alpha_1$};
-%                         \node[cop_rob_vertex] (v3) at (2,0.5) {3 $v_p$};
-%                         \node[vertex] (v4) at (3,0) {4 $y$};
-%                         \node[vertex] (v5) at (3,1) {5 $x$};
-                        
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v3)--(v5);
-%                     \end{tikzpicture}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \onslide<3->{
-%                         \begin{tikzpicture}
-%                             \node[vertex] (v1) at (0,0.5) {1 $\alpha_1$};
-%                             \node[cop_vertex] (v2) at (1,0.5) {2 $\alpha_1$};
-%                             \node[cop_rob_vertex] (v3) at (2,0.5) {3 $v_p$};
-%                             \node[vertex] (v4) at (3,0) {4 $y$};
-%                             \node[cop_vertex] (v5) at (3,1) {5 $x$};
-                            
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v3)--(v5);
-%                         \end{tikzpicture}
-%                     }
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd.]
-%         \renewcommand{\qedsymbol}{}
-%         Ochroniarze w każdym z powyższych przypadków ustawili się w taki sposób, że nie ma wierzchołka zawierającego prezydenta i ochroniarza 
-%         oraz istnieje najwyżej jeden liść bez ochroniarza, nie wliczając wierzchołka prezydenta, który może być liściem. \\
-%         Dodatkowo prezydent jest otoczony.
-%         \pause
-%         W tym momencie prezydent ma 3 możliwe ruchy:
-%         \pause
-%         \begin{enumerate}[<+->]
-%             \item zostać na miejscu.
-%             \item Przejść na wierzchołek, który ma sąsiada bez ochroniarza.
-%             \item Przejść na wierzchołek, który ma 2 sąsiadów bez ochroniarza.
-%         \end{enumerate} 
-%         \pause
-%         Przez $v$ oznaczmy wierzchołek przed prezydenta, a przez $u$ wierzchołek po ruchu prezydenta.\\
-%         Jeżeli $v$ i $u$ to te same wierzchołki, to ochroniarze nie zmieniają swojej pozycji.
-%     \end{proof}
-% \end{frame}
-
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd.]
-%         \renewcommand{\qedsymbol}{}
-%         W przypadku kiedy jedynym sąsiadem $u$ bez ochroniarza jest $v$, to po ruchu prezydenta ochroniarz z $u$ przejdzie do $v$.
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.33\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[vertex] (v1) at (0,0.5) {1};
-%                         \node[cop_vertex] (v2) at (0.9,0.5) {2};
-%                         \node[rob_vertex] (v3) at (1.8,0.5) {3 $v$};
-%                         \node[cop_vertex] (v4) at (2.7,0) {4 $u$};
-%                         \node[cop_vertex] (v5) at (2.7,1) {5};
-                        
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v4)--(v5);
-%                         \draw[edge] (v3)--(v5);
-%                     \end{tikzpicture}
-
-%                 \column{.33\textwidth}
-%                     \centering
-%                     \onslide<2->{
-%                         \begin{tikzpicture}
-%                             \node[vertex] (v1) at (0,0.5) {1};
-%                             \node[cop_vertex] (v2) at (0.9,0.5) {2};
-%                             \node[vertex] (v3) at (1.8,0.5) {3 $v$};
-%                             \node[cop_rob_vertex] (v4) at (2.7,0) {4 $u$};
-%                             \node[cop_vertex] (v5) at (2.7,1) {5};
-                            
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v3)--(v5);
-%                         \end{tikzpicture}
-%                     }
-%                 \column{.33\textwidth}
-%                     \centering
-%                     \onslide<3->{
-%                         \begin{tikzpicture}
-%                             \node[vertex] (v1) at (0,0.5) {1};
-%                             \node[cop_vertex] (v2) at (0.9,0.5) {2};
-%                             \node[cop_vertex] (v3) at (1.8,0.5) {3 $v$};
-%                             \node[rob_vertex] (v4) at (2.7,0) {4 $u$};
-%                             \node[cop_vertex] (v5) at (2.7,1) {5};
-                            
-%                             \draw[edge] (v1)--(v2);
-%                             \draw[edge] (v2)--(v3);
-%                             \draw[edge] (v3)--(v4);
-%                             \draw[edge] (v4)--(v5);
-%                             \draw[edge] (v3)--(v5);
-%                         \end{tikzpicture}
-%                     }
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd.]
-%         \renewcommand{\qedsymbol}{}
-%         Ostatecznie załóżmy, że $u$ ma sąsiada innego niż $v$, który nie ma ochroniarza, oznaczonego przez $w$.
-%         \pause
-%         Nie jest to możliwe aby $v$ i $w$ jednocześnie były liśćmi. Można to udowodnić przez sprzeczność.\\
-%         \pause
-%         Jeżeli prezydent znalazł by się w wierzchołku $v$ na początku gry, to po pierwszym ruchu ochroniarzy $w$ miałby ochroniarza.
-%         Na początku gry ustawiliśmy ochroniarzy najpierw na wszystkich liściach.\\
-%         \pause
-%         Jeżeli prezydent przeszedł z $u$ do $v$ podczas gry, to jedynie ochroniarz z $v$ przeszedł do $u$.
-%         W takim przypadku jeżeli $v$ i $w$ nie mają ochroniarza, to kiedy prezydent był na $u$ to nie był otoczony, co przeczy założeniom aktualnego stanu.
-%         Więc najwyżej jeden z $v$ i $w$ są liśćmi.
-%         \pause
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[rob_vertex] (v1) at (1,0) {1 $v$};
-%                         \node[cop_vertex] (v2) at (2,0.5) {2 $u$};
-%                         \node[vertex] (v3) at (1, 1) {3 $w$};
-%                         \node[cop_vertex] (v4) at (3,0) {4};
-%                         \node[cop_vertex] (v5) at (3,1) {5};
-%                         \node[cop_vertex] (v6) at (4,0.5) {6};
-                        
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v2)--(v4);
-%                         \draw[edge] (v2)--(v5);
-%                         \draw[edge] (v5)--(v6);
-%                         \draw[edge] (v5)--(v3);
-%                     \end{tikzpicture}
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
-% \begin{frame}{Ochroniarze i prezydent}
-%     \begin{proof}[Dowód cd.]
-%         Stąd $v$ albo $w$ ma jeden wierzchołek inny niż $u$ mający ochroniarza.\\
-%         \pause
-%         Skoro $\delta\left(u\right)< n-1$, to bez straty ogólności można założyć, 
-%         że $w$ ma sąsiada $q$ takiego że $q\notin N\left[u\right]$ jednocześnie posiadającego ochroniarza.
-%         \pause
-%         Więc jak prezydent przejdzie z $v$ do $u$, to ochroniach z $u$ przejdzie do $v$, a z $q$ do $w$. 
-%         Skoro $\delta\left(u\right)\ne 1$, to najwyżej jeden liść nie ma ochroniarza. 
-%         Kończąc, nieważne jak prezydent będzie się poruszał od tego momentu, ochroniarze zawsze mogą go otoczyć.
-%         Dlatego $n-2$ ochroniarzy może wygrać z prezydentem na $G$ gdy $\Delta\left(G\right)<n-1$.
-%         \begin{example}
-%             \begin{columns}
-%                 \column{.5\textwidth}
-%                     \centering
-%                     \begin{tikzpicture}
-%                         \node[rob_vertex] (v1) at (1,0) {1 $v$};
-%                         \node[cop_vertex] (v2) at (2,0.5) {2 $u$};
-%                         \node[vertex] (v3) at (1, 1) {3 $w$};
-%                         \node[cop_vertex] (v4) at (0,1) {4 $q$};
-%                         \node[cop_vertex] (v5) at (3,0) {5};
-%                         \node[cop_vertex] (v6) at (3,1) {6};
-%                         \node[cop_vertex] (v7) at (4,0.5) {7};
-                        
-%                         \draw[edge] (v1)--(v2);
-%                         \draw[edge] (v2)--(v3);
-%                         \draw[edge] (v3)--(v4);
-%                         \draw[edge] (v2)--(v5);
-%                         \draw[edge] (v2)--(v6);
-%                         \draw[edge] (v5)--(v7);
-%                     \end{tikzpicture}
-%             \end{columns}
-%         \end{example}  
-%     \end{proof}
-% \end{frame}
-
 \setbeamercovered{transparent}
-\nocite{c_a_r_orig, c_s_r, b_s_p}
+\nocite{c_a_r_orig, c_s_r, b_s_p, h_p_a}
 \begin{frame}[allowframebreaks]{Bibliografia}
     \bibliographystyle{plain}
     \bibliography{bibliography.bib}
