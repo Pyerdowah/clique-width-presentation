@@ -457,7 +457,8 @@
 \end{frame}
 
 \begin{frame}{Dlaczego atomy?}
-    Wiele klasycznych problemów grafowych, między innymi:
+    Wiele NP-zupełnych problemów grafowych można rozwiązać w czasie wielomianowym na klasach grafów o ograniczonej szerokości kliki.\\
+    Część z nich, między innymi:
     \begin{itemize}
         \item Kolorowanie
         \item Minimalne dopełnienie
@@ -465,7 +466,7 @@
         \item Maksymalny ważony zbiór niezależny
         \item Maksymalne indukowane dopasowanie
     \end{itemize}    
-    są rozwiązywalne w czasie wielomianowym na grafie dziedzicznym klasy $G$ wtedy i tylko wtedy, gdy ma to miejsce w przypadku atomów $G$.
+    są rozwiązywalne w czasie wielomianowym na grafie dziedzicznym klasy $G$ wtedy i tylko wtedy, gdy ma to miejsce w przypadku atomów $G$. 
 \end{frame}
 
 \begin{frame}
@@ -545,7 +546,7 @@
 \begin{frame}
     \begin{theorem}
         \renewcommand{\qedsymbol}{}
-        $V_i \cup V_{i,i+1} \cup V_{i-1,i+1}$ jest puste dla każdego $i$.
+        $V_i \cup V_{i,i+1} \cup V_{i-1,i,i+1}$ jest puste dla każdego $i$.
     \end{theorem}
     \graphBigger
 \end{frame}
