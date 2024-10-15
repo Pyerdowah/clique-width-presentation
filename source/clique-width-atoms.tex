@@ -516,20 +516,52 @@
     \end{theorem}
 \end{frame}
 
-\begin{frame}
-    \begin{theorem}
-        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma nieograniczoną szerokość kliki)
-    \end{theorem}
+\begin{frame}{Z czego będziemy korzystać?}
+    Dla stałej $k \geq 0$ i operacji na grafach $\gamma$, klasa grafów $G'$ jest \emph{($k$, $\gamma$)-uzyskana} z klasy grafów $G$, jeśli:
+    \begin{itemize}
+        \item[(i)] każdy graf w $G'$ został uzyskany z grafu w $G$ poprzez wykonanie $\gamma$ co najwyżej $k$ razy, oraz
+        \item[(ii)] dla każdego $G \in G$, istnieje co najmniej jeden graf w $G'$, uzyskany z $G$ poprzez wykonanie $\gamma$ co najwyżej $k$ razy.
+    \end{itemize}
+    \begin{enumerate}
+        \item Usuwanie wierzchołków zachowuje ograniczoność szerokości kliki.
+        \item Dopełnienie podgrafu zachowuje ograniczoność szerokości kliki.
+        \item Dopełnienie grafu dwudzielnego zachowuje ograniczoność szerokości kliki.
+    \end{enumerate}
+
+    \textbf{Lemat.} Grafy łańcuchowe dwudzielne mają szerokość kliki co najwyżej 3.\\
+    \textbf{Lemat.} Atomy grafów podzielonych są grafami pełnymi i mają szerokość kliki co najwyżej 2.
+\end{frame}
+
+\begin{frame}{Schemat działania}
     \begin{proof}
         \renewcommand{\qedsymbol}{}
         Podejście opiera się na trzech następujących twierdzeniach:
-        \begin{itemize}
+        \begin{enumerate}
             \item $(2P_2, \overline{P_2 + P_3})$-wolnych atomów z indukowanym $C_5$ ma ograniczoną szerokość kliki.
             \item $(2P_2, \overline{P_2 + P_3})$-wolnych atomów z indukowanym $C_4$ ma ograniczoną szerokość kliki.
             \item $(C_4, C_5, 2P_2, \overline{P_2 + P_3})$-wolnych atomów ma ograniczoną szerokość kliki.
+        \end{enumerate}
+        $(C_4, C_5, 2P_2)$-wolne grafy są grafami podzielonymi i na mocy lematu, atomy tej klasy są grafami pełnymi, więc mają szerokość kliki wynoszącą co najwyżej 2.    
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Schemat działania}
+    \begin{proof}
+        \renewcommand{\qedsymbol}{}
+        \begin{enumerate}
+            \item Dzielimy zbiór wierzchołków dowolnego $(2P_2, \overline{P_2 + P_3})$-wolnego atomu $G$ na różne podzbiory w zależności od ich sąsiedztw w indukowanym $C_5$ lub $C_4$. 
+            \item Analizujemy właściwości podzbiorów $V(G)$ oraz ich połączenia, a także wykorzystujemy tę wiedzę do zastosowania odpowiednich operacji $\gamma$.
+            \item Te operacje zmienią $G$ w graf $G'$ będący rozłącznym grafem kilku mniejszych grafów, które mają ograniczoną szerokość kliki.
+        \end{enumerate}
+
+        To podejście działa, ponieważ:
+        \begin{itemize}
+            \item stosujemy operacje usuwania wierzchołków, dopełnień podgrafów i dopełnień grafów dwudzielnych tylko ograniczoną liczbę razy;
+            \item nie wykorzystujemy właściwości bycia atomem ani bycia $(2P2, \overline{P_2 + P_3})$-wolnym, gdy opuszczamy klasę grafów po zastosowaniu powyższych operacji grafowych.
         \end{itemize}
     \end{proof}
 \end{frame}
+
 
 \begin{frame}
     \begin{lemma}
@@ -548,7 +580,71 @@
         \renewcommand{\qedsymbol}{}
         $V_i \cup V_{i,i+1} \cup V_{i-1,i,i+1}$ jest puste dla każdego $i$.
     \end{theorem}
-    \graphBigger
+    \textbf{Dowód przez sprzeczność:} $x \in V_2 \cup V_{2,3} \cup V_{1,2,3}$
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2)[fill=red] at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4)[fill=red] at (306:1.5) {$v_4$};
+            \node (v5)[fill=red] at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw[red, very thick] (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n2) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,2,3}$};
+            % Edges from first neighborhood to initial cycle
+
+            \draw[red, bend left, very thick] (n2) to (v2);
+            \draw[red, bend left] (n2) to (v1);
+            \draw[red, bend left] (n2) to (v3);
+         
+        \end{tikzpicture}
+    \end{figure}
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n1) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (4, 1)$) {$V_{1,3,4}$};
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,3}$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,5}$};
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 1)$) {$V_{1,4}$};
+            
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n1) to (v1);
+            \draw[blue, bend left] (n1) to (v3);
+            \draw[blue, bend left] (n1) to (v4);
+            \draw[blue, bend left] (n2) to (v3);
+            \draw[blue, bend left] (n2) to (v1);
+            \draw[blue, bend right] (n3) to (v1);
+            \draw[blue, bend right] (n3) to (v2);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, bend right] (n3) to (v5);
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -556,7 +652,77 @@
         \renewcommand{\qedsymbol}{}
         Zbiory $V_\emptyset \cup V_{i,i+2}$ dla każdego $i$ są niezależne.
     \end{theorem}
-    \graphBigger
+    \textbf{Dowód przez sprzeczność:} $x,y \in V_\emptyset \cup V_{1,3}$
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4)[fill=red] at (306:1.5) {$v_4$};
+            \node (v5)[fill=red] at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw[red, very thick] (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n2) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,3}$};
+            \node (n3) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{\emptyset}$};
+
+            
+            % Edges from first neighborhood to initial cycle
+
+            \draw[red, bend right] (n2) to (v1);
+            \draw[red, bend right] (n2) to (v3);
+            \draw[red, very thick] (n2) to (n3);
+         
+        \end{tikzpicture}
+    \end{figure}
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n1) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (4, 1)$) {$V_{1,3,4}$};
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,3}$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,5}$};
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n1) to (v1);
+            \draw[blue, bend left] (n1) to (v3);
+            \draw[blue, bend left] (n1) to (v4);
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend left] (n2) to (v3);
+            \draw[blue, bend left] (n2) to (v1);
+            \draw[blue, bend right] (n3) to (v1);
+            \draw[blue, bend right] (n3) to (v2);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, bend right] (n3) to (v5);
+            \draw[blue] (n5) to (n4);
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
