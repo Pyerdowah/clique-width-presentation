@@ -429,7 +429,7 @@
     \end{enumerate}
 
     \textbf{Lemat.} Grafy łańcuchowe dwudzielne mają szerokość kliki co najwyżej 3.\\
-    \textbf{Lemat.} Atomy grafów podzielonych są grafami pełnymi i mają szerokość kliki co najwyżej 2.
+    \textbf{Lemat.} Atomy podzielone są grafami pełnymi i mają szerokość kliki co najwyżej 2.
 \end{frame}
 
 \begin{frame}{Schemat działania}
@@ -1128,13 +1128,6 @@
             \node (v3) at (234:1.5) {$v_3$};
             \node (v4) at (306:1.5) {$v_4$};
             \node (v5) at (18:1.5) {$v_5$};
-            
-            % Draw edges for the initial cycle C_5
-            \draw (v1) -- (v2);
-            \draw (v2) -- (v3);
-            \draw (v3) -- (v4);
-            \draw (v4) -- (v5);
-            \draw (v5) -- (v1);
                  
             % First neighborhood
             \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
