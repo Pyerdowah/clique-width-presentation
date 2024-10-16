@@ -35,106 +35,6 @@
 
 \begin{document}
 
-\newcommand{\graphBigger}{
-    \centering
-    \begin{tikzpicture}[scale=0.8, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
-
-        % Initial cycle C_5 - pentagon shape
-        \node (v1) [fill=black] at (90:1.5) {};
-        \node (v2) [fill=black] at (162:1.5) {};
-        \node (v3) [fill=black] at (234:1.5) {};
-        \node (v4) [fill=black] at (306:1.5) {};
-        \node (v5) [fill=black] at (18:1.5) {};
-        
-        % Draw edges for the initial cycle C_5
-        \draw (v1) -- (v2);
-        \draw (v2) -- (v3);
-        \draw (v3) -- (v4);
-        \draw (v4) -- (v5);
-        \draw (v5) -- (v1);
-    
-        % First neighborhood
-        \node (n1) [fill=purple, ellipse, draw=purple, minimum size=15pt] at ($(v1) + (4, 1)$) {};
-        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt] at ($(v1) + (2, 1)$) {};
-        \node (n3) [fill=green, ellipse, draw=green, minimum size=15pt] at ($(v1) + (0, 1)$) {};
-        \node (n4) [fill=yellow, ellipse, draw=yellow, minimum size=15pt] at ($(v1) + (-2, 1)$) {};
-        \node (n5) [fill=red, ellipse, draw=red, minimum size=15pt] at ($(v1) + (-4, 1)$) {};
-        
-        % Edges from first neighborhood to initial cycle
-        \draw[purple, bend left] (n1) to (v1);
-        \draw[purple, bend left] (n1) to (v2);
-        \draw[purple, bend left] (n1) to (v3);
-        \draw[purple, bend left] (n1) to (v4);
-        \draw[purple, bend left] (n1) to (v5);
-        \draw[blue, bend left] (n2) to (v2);
-        \draw[blue, bend left] (n2) to (v1);
-        \draw[blue, bend left] (n2) to (v5);
-        \draw[green, bend right] (n3) to (v1);
-        \draw[green, bend right] (n3) to (v2);
-        \draw[red, bend right] (n5) to (v3);
-        \draw[yellow, bend right] (n4) to (v2);
-        
-        % Second neighborhood (independent set)
-        \node (indep1) [fill=none] at ($(n1) + (0, 1.2)$) {};
-        \node (indep2) [fill=none] at ($(n2) + (-0.75, 1)$) {};
-        \node (indep3) [fill=none] at ($(n3) + (-0.75, 0.8)$) {};
-        \node (indep4) [fill=none] at ($(n4) + (0.75, 0.8)$) {};
-        \node (indep5) [fill=none] at ($(n4) + (0, 1)$) {};
-        \node (indep6) [fill=none] at ($(n4) + (-0.5, 0.8)$) {};
-
-        \node (dots1) [draw=none, fill=none] at ($(v1) + (-5, 1)$) {$\cdots$};
-        \node (dots2) [draw=none, fill=none] at ($(indep1) + (1, 0)$) {$\cdots$};
-
-    \end{tikzpicture}
-}
-
-\newcommand{\graphSmaller}{
-    \centering
-    \begin{tikzpicture}[scale=0.8, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
-
-        % Initial cycle C_5 - pentagon shape
-        \node (v1) [fill=black] at (90:1.5) {};
-        \node (v2) [fill=black] at (180:1.5) {};
-        \node (v3) [fill=black] at (270:1.5) {};
-        \node (v4) [fill=black] at (360:1.5) {};
-        
-        % Draw edges for the initial cycle C_5
-        \draw (v1) -- (v2);
-        \draw (v2) -- (v3);
-        \draw (v3) -- (v4);
-        \draw (v4) -- (v1);
-    
-        % First neighborhood
-        \node (n1) [fill=purple, ellipse, draw=purple, minimum size=15pt] at ($(v1) + (4, 1)$) {};
-        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt] at ($(v1) + (2, 1)$) {};
-        \node (n3) [fill=green, ellipse, draw=green, minimum size=15pt] at ($(v1) + (0, 1)$) {};
-        \node (n4) [fill=yellow, ellipse, draw=yellow, minimum size=15pt] at ($(v1) + (-2, 1)$) {};
-        
-        % Edges from first neighborhood to initial cycle
-        \draw[purple, bend left] (n1) to (v1);
-        \draw[purple, bend left] (n1) to (v2);
-        \draw[purple, bend left] (n1) to (v3);
-        \draw[purple, bend left] (n1) to (v4);
-        \draw[blue, bend left] (n2) to (v2);
-        \draw[blue, bend left] (n2) to (v1);
-        \draw[green, bend right] (n3) to (v1);
-        \draw[green, bend right] (n3) to (v2);
-        \draw[yellow, bend right] (n4) to (v2);
-        
-        % Second neighborhood (independent set)
-        \node (indep1) [fill=none] at ($(n1) + (0, 1.2)$) {};
-        \node (indep2) [fill=none] at ($(n2) + (-0.75, 1)$) {};
-        \node (indep3) [fill=none] at ($(n3) + (-0.75, 0.8)$) {};
-        \node (indep4) [fill=none] at ($(n4) + (0.75, 0.8)$) {};
-        \node (indep5) [fill=none] at ($(n4) + (0, 1)$) {};
-        \node (indep6) [fill=none] at ($(n4) + (-0.5, 0.8)$) {};
-
-        \node (dots1) [draw=none, fill=none] at ($(v1) + (-3, 1)$) {$\cdots$};
-        \node (dots2) [draw=none, fill=none] at ($(indep1) + (1, 0)$) {$\cdots$};
-
-    \end{tikzpicture}
-}
-
 \tikzset{vertex/.style={circle, draw=black, inner sep=0pt, minimum size=0.6cm, text width=0.75cm, align=center}}
 \tikzset{cop_vertex/.style={vertex, fill=blue!50}}
 \tikzset{rob_vertex/.style={vertex, fill=red!50}}
@@ -245,7 +145,7 @@
 \begin{frame}{Definicje}
     \begin{proof}[Klasa grafów heredytalnych (dziedzicznych)]
         \renewcommand{\qedsymbol}{}
-        Klasa jest dziedziczna wtedy i tylko wtedy, gdy moze być scharakteryzowana prze unikalny zbiór $H$ minimalnych, zabronionych podgrafów indukowanych.\\
+        Klasa jest dziedziczna wtedy i tylko wtedy, gdy może być scharakteryzowana przez unikalny zbiór $H$ minimalnych, zabronionych podgrafów indukowanych.\\
         Graf $G$ jest $H$-wolny jeśli $G$ nie ma podgrafu indukowanego, izomorficznego do $H$.\\
         Graf $G$ jest ($H_1,...,H_p$)-wolny jeśli $G$ nie ma podgrafów indukowanych, izomorficznych do $H_i$ dla każdego $i$.\\
     \end{proof}
@@ -400,7 +300,7 @@
 \begin{frame}{Definicje}
     \begin{proof}[Atom]
         \renewcommand{\qedsymbol}{}
-        Spójny graf, który nie posiada grafu rozpinającego będącego kliką.
+        Spójny graf, który nie posiada podgrafu rozpinającego będącego kliką.
     \end{proof}
     \begin{examples}
                 \centering
@@ -471,7 +371,7 @@
 
 \begin{frame}
     \begin{theorem}
-        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze ze klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma nieograniczoną szerokość kliki)
+        Klasa atomów $(2P_2, \overline{P_2 + P_3})$-wolnych ma ograniczoną szerokość kliki (mając na uwadze że klasa grafów $(2P_2, \overline{P_2 + P_3})$-wolnych ma nieograniczoną szerokość kliki)
         \begin{figure}[h]
             \centering
             \begin{minipage}{0.45\textwidth}
@@ -604,8 +504,8 @@
             % Edges from first neighborhood to initial cycle
 
             \draw[red, bend left, very thick] (n2) to (v2);
-            \draw[red, bend left] (n2) to (v1);
-            \draw[red, bend left] (n2) to (v3);
+            \draw[black, bend left] (n2) to (v1);
+            \draw[black, bend left] (n2) to (v3);
          
         \end{tikzpicture}
     \end{figure}
@@ -628,21 +528,30 @@
             \draw (v5) -- (v1);
         
             % First neighborhood
-            \node (n1) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (4, 1)$) {$V_{1,3,4}$};
-            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,3}$};
-            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,5}$};
+            \node (n1) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (4, 1)$) {$V_{1,2,4}$};
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{2,3,5}$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,3,4}$};
             \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 1)$) {$V_{1,4}$};
-            
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+
             % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n5) to (v1);
+            \draw[blue, bend left] (n5) to (v2);
+            \draw[blue, bend left] (n5) to (v3);
+            \draw[blue, bend left] (n5) to (v4);
+            \draw[blue, bend left] (n5) to (v5);
             \draw[blue, bend left] (n1) to (v1);
-            \draw[blue, bend left] (n1) to (v3);
+            \draw[blue, bend left] (n1) to (v2);
             \draw[blue, bend left] (n1) to (v4);
+            \draw[blue, bend left] (n2) to (v2);
             \draw[blue, bend left] (n2) to (v3);
-            \draw[blue, bend left] (n2) to (v1);
+            \draw[blue, bend left] (n2) to (v5);
             \draw[blue, bend right] (n3) to (v1);
             \draw[blue, bend right] (n3) to (v2);
             \draw[blue, bend right] (n4) to (v4);
-            \draw[blue, bend right] (n3) to (v5);
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend right] (n3) to (v4);
+            \draw[blue, bend right] (n3) to (v3);
         \end{tikzpicture}
     \end{figure}
 \end{frame}
@@ -678,8 +587,8 @@
             
             % Edges from first neighborhood to initial cycle
 
-            \draw[red, bend right] (n2) to (v1);
-            \draw[red, bend right] (n2) to (v3);
+            \draw[black, bend right] (n2) to (v1);
+            \draw[black, bend right] (n2) to (v3);
             \draw[red, very thick] (n2) to (n3);
          
         \end{tikzpicture}
@@ -703,24 +612,32 @@
             \draw (v5) -- (v1);
         
             % First neighborhood
-            \node (n1) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (4, 1)$) {$V_{1,3,4}$};
-            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,3}$};
-            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,5}$};
+            \node (n1) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (4, 1)$) {$V_{1,2,4}$};
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{2,3,5}$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,3,4}$};
             \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
             \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
 
             % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n6) to (v1);
+            \draw[blue, bend left] (n6) to (v2);
+            \draw[blue, bend left] (n6) to (v3);
+            \draw[blue, bend left] (n6) to (v4);
+            \draw[blue, bend left] (n6) to (v5);
             \draw[blue, bend left] (n1) to (v1);
-            \draw[blue, bend left] (n1) to (v3);
+            \draw[blue, bend left] (n1) to (v2);
             \draw[blue, bend left] (n1) to (v4);
             \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend left] (n2) to (v2);
             \draw[blue, bend left] (n2) to (v3);
-            \draw[blue, bend left] (n2) to (v1);
+            \draw[blue, bend left] (n2) to (v5);
             \draw[blue, bend right] (n3) to (v1);
             \draw[blue, bend right] (n3) to (v2);
+            \draw[blue, bend right] (n3) to (v3);
             \draw[blue, bend right] (n4) to (v4);
-            \draw[blue, bend right] (n3) to (v5);
-            \draw[blue] (n5) to (n4);
+            \draw[blue, bend right] (n3) to (v4);
+            \draw[blue] (n5) to (n3);
         \end{tikzpicture}
     \end{figure}
 \end{frame}
@@ -730,15 +647,178 @@
         \renewcommand{\qedsymbol}{}
         Dla każdego $i$, $|V_{i,i+1,i+3} \cup V_{i,i+1,i+2,i+3}| \leq 1$.
     \end{theorem}
-    \graphBigger
+    \textbf{Dowód przez sprzeczność:} $x,y \in V_{1,2,4} \cup V_{1,2,3,4}$
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1)[fill=red] at (90:1.5) {$v_1$};
+            \node (v2)[fill=red] at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4)[fill=red] at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw[red, very thick] (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n2) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,2,4}$};
+            \node (n3) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,3,4}$};
+
+            
+            % Edges from first neighborhood to initial cycle
+
+            \draw[red, bend right, very thick] (n2) to (v1);
+            \draw[red, bend right, very thick] (n2) to (v2);
+            \draw[red, bend right, very thick] (n2) to (v4);
+            \draw[red, bend right, very thick] (n3) to (v1);
+            \draw[red, bend right, very thick] (n3) to (v2);
+            \draw[black, bend right] (n3) to (v3);
+            \draw[red, bend right, very thick] (n3) to (v4);
+         
+        \end{tikzpicture}
+    \end{figure}
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{2,3,5}$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,3,4}$};
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n6) to (v1);
+            \draw[blue, bend left] (n6) to (v2);
+            \draw[blue, bend left] (n6) to (v3);
+            \draw[blue, bend left] (n6) to (v4);
+            \draw[blue, bend left] (n6) to (v5);
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend left] (n2) to (v2);
+            \draw[blue, bend left] (n2) to (v3);
+            \draw[blue, bend left] (n2) to (v5);
+            \draw[blue, bend right] (n3) to (v1);
+            \draw[blue, bend right] (n3) to (v2);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, bend right] (n3) to (v3);
+            \draw[blue, bend right] (n3) to (v4);
+            \draw[blue] (n5) to (n3);
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
     \begin{theorem}
         \renewcommand{\qedsymbol}{}
-        Dla każdego $i$ istnieje co najwyżej jedna krawędź między $V_{i,i+2}$ a $V_{i,i-2}$.
+        Dla każdego $i$ istnieje co najwyżej jedną krawędź między $V_{i,i+2}$ a $V_{i,i-2}$.
     \end{theorem}
-    \graphBigger
+    \textbf{Dowód przez sprzeczność:} $x \in V_{1,3}$ i ma dwóch sąsiadów $y,y' \in V_{1,4}$
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1)[fill=red] at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4)[fill=red] at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n2) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,3}$};
+            \node (n3) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,4}$};
+            \node (ny) [fill=black, circle] at ($(v1) + (-1.5, 1)$) {};
+            \node (nyy) [fill=black, circle] at ($(v1) + (-2.5, 1)$) {};
+            \node (x) [fill=black, circle] at ($(v1) + (2, 1)$) {};
+
+            
+            % Edges from first neighborhood to initial cycle
+
+            \draw[red, bend right, very thick] (nyy) to (v1);
+            \draw[red, bend right, very thick] (nyy) to (v4);
+            \draw[red, bend right, very thick] (ny) to (v4);
+            \draw[red, bend right, very thick] (ny) to (x);
+            \draw[red, bend right, very thick] (nyy) to (x);
+            \draw[red, bend right, very thick] (v1) to (x);
+            \draw[black, bend right] (v3) to (x);
+         
+        \end{tikzpicture}
+    \end{figure}
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{2,3,5}$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,3,4}$};
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+            \node (n7) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, -2)$) {$V_{1,3}$};
+
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n6) to (v1);
+            \draw[blue, bend left] (n6) to (v2);
+            \draw[blue, bend left] (n6) to (v3);
+            \draw[blue, bend left] (n6) to (v4);
+            \draw[blue, bend left] (n6) to (v5);
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend left] (n2) to (v2);
+            \draw[blue, bend left] (n2) to (v3);
+            \draw[blue, bend left] (n2) to (v5);
+            \draw[blue, bend right] (n3) to (v1);
+            \draw[blue, bend right] (n3) to (v2);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, bend right] (n3) to (v3);
+            \draw[blue, bend right] (n3) to (v4);
+            \draw[blue] (n5) to (n3);
+            \draw[blue] (n7) to (n4);
+            \draw[blue, bend right] (n7) to (v1);
+            \draw[blue, bend right] (n7) to (v3);
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -746,7 +826,92 @@
         \renewcommand{\qedsymbol}{}
         Dla każdego $i$, $V_{i,i+2}$ jest pełne w stosunku do $V_{i-1,i+1} \cup V_{i+1,i+3}$.
     \end{theorem}
-    \graphBigger
+    \textbf{Dowód przez sprzeczność:} $x \in V_{1,3}$ i $y \in V_{2,4}$
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1)[fill=red] at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4)[fill=red] at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n2) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{1,3}$};
+            \node (n3) [fill=red, ellipse, draw=red, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{2,4}$};
+
+            
+            % Edges from first neighborhood to initial cycle
+
+            \draw[red, bend right, very thick] (n2) to (v1);
+            \draw[black, bend right] (n2) to (v3);
+            \draw[red, bend right, very thick] (n3) to (v4);
+            \draw[black, bend right] (n3) to (v2);
+
+         
+        \end{tikzpicture}
+    \end{figure}
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+        
+            % First neighborhood
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{2,3,5}$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,3,4}$};
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+            \node (n7) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, -2)$) {$V_{1,3}$};
+            \node (n8) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, -4)$) {$V_{2,4}$};
+
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n6) to (v1);
+            \draw[blue, bend left] (n6) to (v2);
+            \draw[blue, bend left] (n6) to (v3);
+            \draw[blue, bend left] (n6) to (v4);
+            \draw[blue, bend left] (n6) to (v5);
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend left] (n2) to (v2);
+            \draw[blue, bend left] (n2) to (v3);
+            \draw[blue, bend left] (n2) to (v5);
+            \draw[blue, bend right] (n3) to (v1);
+            \draw[blue, bend right] (n3) to (v2);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, bend right] (n3) to (v3);
+            \draw[blue, bend right] (n3) to (v4);
+            \draw[blue] (n5) to (n3);
+            \draw[blue] (n7) to (n4);
+            \draw[blue] (n7) to (n8);
+            \draw[blue, bend right] (n7) to (v1);
+            \draw[blue, bend right] (n7) to (v3);
+            \draw[blue] (n8) to (n4);
+            \draw[blue, bend right] (n8) to (v2);
+            \draw[blue, bend right] (n8) to (v4);
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
@@ -754,12 +919,239 @@
         \renewcommand{\qedsymbol}{}
         Jeżeli $x \in V_{1,2,3,4,5}$, to $x$ jest pełne w stosunku do $V(G) \setminus \{x\}$. W szczególności, $V_{1,2,3,4,5}$ jest kliką.
     \end{theorem}
-    \graphBigger
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=.75, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+                 
+            % First neighborhood
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (2, 1)$) {$V_{2,3,5}$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-2, 1)$) {$V_{1,2,3,4}$};
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+            \node (n7) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, -2)$) {$V_{1,3}$};
+            \node (n8) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, -4)$) {$V_{2,4}$};
+
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n6) to (v1);
+            \draw[blue, bend left] (n6) to (v2);
+            \draw[blue, bend left] (n6) to (v3);
+            \draw[blue, bend left] (n6) to (v4);
+            \draw[blue, bend left] (n6) to (v5);
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend left] (n2) to (v2);
+            \draw[blue, bend left] (n2) to (v3);
+            \draw[blue, bend left] (n2) to (v5);
+            \draw[blue, bend right] (n3) to (v1);
+            \draw[blue, bend right] (n3) to (v2);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, bend right] (n3) to (v3);
+            \draw[blue, bend right] (n3) to (v4);
+            \draw[blue] (n5) to (n3);
+            \draw[blue, dashed] (n7) to (n4);
+            \draw[blue, bend right] (n7) to (v1);
+            \draw[blue, bend right] (n7) to (v3);
+            \draw[blue, dashed] (n8) to (n4);
+            \draw[blue, bend right] (n8) to (v2);
+            \draw[blue, bend right] (n8) to (v4);
+            \draw[purple, bend right] (n6) to (n2);
+            \draw[purple, bend right] (n6) to (n3);
+            \draw[purple, bend right] (n6) to (n4);
+            \draw[purple, bend right] (n6) to (n7);
+            \draw[purple, bend right] (n6) to (n8);
+            \draw[purple, bend right] (n6) to (n5);
+            \draw[blue] (n7) to (n8);
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \textbf{1.} Dla każdego $i$, $|V_{i,i+1,i+3} \cup V_{i,i+1,i+2,i+3}| \leq 1$. - usuwamy co najwyżej 5 wierzchołków.
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=.75, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+                 
+            % First neighborhood
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+            \node (n7) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, -2)$) {$V_{1,3}$};
+            \node (n8) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, -4)$) {$V_{2,4}$};
+
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend left] (n6) to (v1);
+            \draw[blue, bend left] (n6) to (v2);
+            \draw[blue, bend left] (n6) to (v3);
+            \draw[blue, bend left] (n6) to (v4);
+            \draw[blue, bend left] (n6) to (v5);
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, dashed] (n7) to (n4);
+            \draw[blue, bend right] (n7) to (v1);
+            \draw[blue, dashed] (n8) to (n4);
+            \draw[blue, bend right] (n8) to (v2);
+            \draw[blue, bend right] (n8) to (v4);
+            \draw[purple, bend right] (n6) to (n4);
+            \draw[purple, bend right] (n6) to (n7);
+            \draw[purple, bend right] (n6) to (n8);
+            \draw[purple, bend right] (n6) to (n5);
+            \draw[blue, bend right] (n7) to (v3);
+            \draw[blue] (n7) to (n8);
+
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \textbf{2.} Jeżeli $x \in V_{1,2,3,4,5}$, to $x$ jest pełne w stosunku do $V(G) \setminus \{x\}$. W szczególności, $V_{1,2,3,4,5}$ jest kliką. - dopełnienie dwudzielne na $V_{1,2,3,4,5}$ względem reszty grafu.\\
+    \textbf{3.} Wykonujemy dopełnienie na $V_{1,2,3,4,5}$ - staje się on zbiorem niezależnym.
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=.75, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+                 
+            % First neighborhood
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+            \node (n7) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, -2)$) {$V_{1,3}$};
+            \node (n8) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, -4)$) {$V_{2,4}$};
+
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, dashed] (n7) to (n4);
+            \draw[blue, bend right] (n7) to (v1);
+            \draw[blue, dashed] (n8) to (n4);
+            \draw[blue, bend right] (n8) to (v2);
+            \draw[blue, bend right] (n8) to (v4);
+            \draw[blue, bend right] (n7) to (v3);
+            \draw[blue] (n7) to (n8);
+
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+    \textbf{4.} Dla każdego $i$ istnieje co najwyżej jedna krawędź między $V_{i,i+2}$ a $V_{i,i-2}$. - usuwamy co najwyżej 5 wierzchołków.\\
+    Pozostałe zbiory $V$ są niezależne.
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=.75, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+                 
+            % First neighborhood
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+            \node (n7) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, -2)$) {$V_{1,3}$};
+            \node (n8) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, -4)$) {$V_{2,4}$};
+
+            % Edges from first neighborhood to initial cycle
+            \draw[blue, bend right] (n4) to (v1);
+            \draw[blue, bend right] (n4) to (v4);
+            \draw[blue, bend right] (n7) to (v1);
+            \draw[blue, bend right] (n8) to (v2);
+            \draw[blue, bend right] (n8) to (v4);
+            \draw[blue, bend right] (n7) to (v3);
+            \draw[blue] (n7) to (n8);
+
+        \end{tikzpicture}
+    \end{figure}
+\end{frame}
+
+\begin{frame}
+
+    \textbf{5.} Dla każdego $i$, $V_{i,i+2}$ jest pełne w stosunku do $V_{i-1,i+1} \cup V_{i+1,i+3}$. - wykonujemy 
+    5 dopełnień dwudzielnych. Między parami $V_{i-1, i+1} \cup \{v_i\}$, a $V_{i, i+2} \cup \{v_{i+1}\}$
+    \begin{figure}[h]
+        \centering
+        \begin{tikzpicture}[scale=.75, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:1.5) {$v_1$};
+            \node (v2) at (162:1.5) {$v_2$};
+            \node (v3) at (234:1.5) {$v_3$};
+            \node (v4) at (306:1.5) {$v_4$};
+            \node (v5) at (18:1.5) {$v_5$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw (v1) -- (v2);
+            \draw (v2) -- (v3);
+            \draw (v3) -- (v4);
+            \draw (v4) -- (v5);
+            \draw (v5) -- (v1);
+                 
+            % First neighborhood
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, 0)$) {$V_{1,4}$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, 1)$) {$V_{\emptyset}$};
+            \node (n6) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (8, 1)$) {$V_{1,2,3,4,5}$};
+            \node (n7) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-4, -2)$) {$V_{1,3}$};
+            \node (n8) [fill=blue, ellipse, draw=blue, minimum size=10pt, text=white] at ($(v1) + (-6, -4)$) {$V_{2,4}$};
+
+            % Edges from first neighborhood to initial cycle
+
+        \end{tikzpicture}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
     \begin{proof}      
-        Z powyższych twierdzeń wynika, że odpowiednia liczba operacji na $G$ (usunięcia wierzchołków, komplementacje podgrafów, komplementacje dwudzielne) prowadzi do grafu, który ma ograniczoną szerokość kliki.
+        Z powyższych twierdzeń wynika, że odpowiednia liczba operacji na $G$ (10 usunięć wierzchołków, 1 dopełnienia podgrafu, 6 dopełnień dwudzielnych) prowadzi do grafu, który ma ograniczoną szerokość kliki.
         \end{proof}
 \end{frame}
 
@@ -776,73 +1168,288 @@
 \begin{frame}
     \begin{theorem}
         \renewcommand{\qedsymbol}{}
-        Dla każdego $i$, $V_{i,i+1,i+2}$ jest pusty.
+        \begin{enumerate}
+            \item Dla każdego $i$, $V_{i,i+1,i+2}$ jest pusty.
+            \item Zbiór $V_\emptyset \cup V_i \cup V_{i+1} \cup V_{i,i+1}$ jest niezależny dla każdego $i$.
+            \item Dla każdego $i$, zbiory $V_{i,i+1} \cup V_{i,i+2}$ i $V_{i,i+1} \cup V_{i+1,i+3}$ są niezależne.
+            \item Graf $G[V_{1,2,3,4}]$ jest wolny od $P_1 + P_2$, a więc ma ograniczoną szerokość kliki.
+            \item Dla $i \in \{1,2\}$, $V_{i,i+2}$ jest pełne względem $V_{1,2,3,4}$.
+            \item Dla każdego $i$, albo $V_{i-1} \cup V_{i-1,i}$, albo $V_{i,i+1} \cup V_{i+1}$ jest puste.
+            \item Jeżeli $x \in V_\emptyset$, to $x$ ma co najmniej dwóch sąsiadów w jednym z $V_{1,3}$ lub $V_{2,4}$ i jest antykompletny względem drugiego zbioru. Ponadto, $x$ jest pełny względem $V_{1,2,3,4}$.
+            \item Dla każdego $i \in \{1, 2\}$, $|V_{i,i+1} \cup V_{i+2,i+3}| \leq 2$.
+            \item Dla każdego $i \in \{1, 2, 3, 4\}$, $V_i$ jest pełne względem $V_{1,2,3,4}$, a co najwyżej jeden wierzchołek z $V_{i,i+2}$ ma sąsiadów w $V_i$.
+        \end{enumerate} 
     \end{theorem}
-    \graphSmaller
 \end{frame}
 
 \begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Zbiór $V_\emptyset \cup V_i \cup V_{i+1} \cup V_{i,i+1}$ jest niezależny dla każdego $i$.
-    \end{theorem}
-    \graphSmaller
+        \centering
+        \begin{tikzpicture}[scale=0.75, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+            % Initial cycle C_5 - pentagon shape
+            \node (v1) at (90:2) {$v_1$};
+            \node (v2) at (180:2) {$v_2$};
+            \node (v3) at (270:2) {$v_3$};
+            \node (v4) at (360:2) {$v_4$};
+            
+            % Draw edges for the initial cycle C_5
+            \draw[black] (v1) -- (v2);
+            \draw[black] (v2) -- (v3);
+            \draw[black] (v3) -- (v4);
+            \draw[black] (v4) -- (v1);
+        
+            % First neighborhood
+            \node (n1) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v1) + (0, 2)$) {$V_1$};
+            \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v2) + (-2, 0)$) {$V_2$};
+            \node (n3) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v3) + (0, -2)$) {$V_3$};
+            \node (n4) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v4) + (2, 0)$) {$V_4$};
+            \node (n5) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0, 0)$) {$V_{1,2,3,4}$};
+
+            \node (n12) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-2,2)$) {$V_{1,2}$};
+            \node (n13) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-6,0)$) {$V_{1,3}$};
+            \node (n14) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(2,2)$) {$V_{1,4}$};
+            \node (n24) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0,-6)$) {$V_{2,4}$};
+            \node (n34) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(2,-2)$) {$V_{3,4}$};
+            \node (n23) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-2,-2)$) {$V_{2,3}$};
+            \node (ne) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(5,2)$) {$V_{\emptyset}$};
+
+            
+            % Edges from first neighborhood to initial cycle
+            \draw[blue] (n1) to (v1);
+            \draw[blue] (n2) to (v2);
+            \draw[blue] (n3) to (v3);
+            \draw[blue] (n4) to (v4);
+
+            \draw[blue, bend left] (n1) to (n5);
+            \draw[blue, bend left] (n2) to (n5);
+            \draw[blue, bend left] (n3) to (n5);
+            \draw[blue, bend left] (n4) to (n5);
+
+            \draw[blue] (n5) to (v1);
+            \draw[blue] (n5) to (v2);
+            \draw[blue] (n5) to (v3);
+            \draw[blue] (n5) to (v4);
+            \draw[blue] (n5) to (ne);
+            \draw[blue, bend left] (n5) to (n24);
+            \draw[blue, bend left] (n5) to (n13);
+            \draw[blue, bend left] (ne) to (n24);
+
+            \draw[blue,bend right] (n12) to (v1);
+            \draw[blue,bend right] (n12) to (v2);
+            \draw[blue,bend right] (n14) to (v1);
+            \draw[blue,bend right] (n14) to (v4);
+            \draw[blue,bend right] (n34) to (v3);
+            \draw[blue,bend right] (n34) to (v4);
+            \draw[blue,bend right] (n23) to (v2);
+            \draw[blue,bend right] (n23) to (v3);
+
+            \draw[blue,bend right, dashed] (n13) to (n1);
+            \draw[blue,bend right, dashed] (n24) to (n2);
+    
+        \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Dla każdego $i$, zbiory $V_{i,i+1} \cup V_{i,i+2}$ i $V_{i,i+1} \cup V_{i+1,i+3}$ są niezależne.
-    \end{theorem}
-    \graphSmaller
+    \textbf{1.} Dla każdego $i$, albo $V_{i-1} \cup V_{i-1,i}$, albo $V_{i,i+1} \cup V_{i+1}$ jest puste.\\
+    Dla każdego $i \in \{1, 2\}$, $|V_{i,i+1} \cup V_{i+2,i+3}| \leq 2$. - co najwyżej 2 operacje usunięcia wierzchołków. Graf na tym etapie może już nie być atomem.
+    \centering
+    \begin{tikzpicture}[scale=0.65, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+
+        % Initial cycle C_5 - pentagon shape
+        \node (v1) at (90:2) {$v_1$};
+        \node (v2) at (180:2) {$v_2$};
+        \node (v3) at (270:2) {$v_3$};
+        \node (v4) at (360:2) {$v_4$};
+        
+        % Draw edges for the initial cycle C_5
+        \draw[black] (v1) -- (v2);
+        \draw[black] (v2) -- (v3);
+        \draw[black] (v3) -- (v4);
+        \draw[black] (v4) -- (v1);
+    
+        % First neighborhood
+        \node (n1) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v1) + (0, 2)$) {$V_1$};
+        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v2) + (-2, 0)$) {$V_2$};
+        \node (n3) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v3) + (0, -2)$) {$V_3$};
+        \node (n4) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v4) + (2, 0)$) {$V_4$};
+        \node (n5) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0, 0)$) {$V_{1,2,3,4}$};
+
+        \node (n13) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-6,0)$) {$V_{1,3}$};
+        \node (n24) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0,-6)$) {$V_{2,4}$};
+        \node (ne) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(5,2)$) {$V_{\emptyset}$};
+
+        
+        % Edges from first neighborhood to initial cycle
+        \draw[blue] (n1) to (v1);
+        \draw[blue] (n2) to (v2);
+        \draw[blue] (n3) to (v3);
+        \draw[blue] (n4) to (v4);
+
+        \draw[blue, bend left] (n1) to (n5);
+        \draw[blue, bend left] (n2) to (n5);
+        \draw[blue, bend left] (n3) to (n5);
+        \draw[blue, bend left] (n4) to (n5);
+
+        \draw[blue] (n5) to (v1);
+        \draw[blue] (n5) to (v2);
+        \draw[blue] (n5) to (v3);
+        \draw[blue] (n5) to (v4);
+        \draw[blue] (n5) to (ne);
+        \draw[blue, bend left] (n5) to (n24);
+        \draw[blue, bend left] (n5) to (n13);
+        \draw[blue, bend left] (ne) to (n24);
+
+        \draw[blue,bend right, dashed] (n13) to (n1);
+        \draw[blue,bend right, dashed] (n24) to (n2);
+
+    \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Graf $G[V_{1,2,3,4}]$ jest wolny od $P_1 + P_2$, a więc ma ograniczoną szerokość kliki.
-        \end{theorem}
-    \graphSmaller
+    \textbf{2.} Usunięcie cyklu poprzez 4 operacje usunięcia wierzchołka.
+    \centering
+    \begin{tikzpicture}[scale=0.65, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+        % First neighborhood
+        \node (n1) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v1) + (0, 2)$) {$V_1$};
+        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v2) + (-2, 0)$) {$V_2$};
+        \node (n3) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v3) + (0, -2)$) {$V_3$};
+        \node (n4) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v4) + (2, 0)$) {$V_4$};
+        \node (n5) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0, 0)$) {$V_{1,2,3,4}$};
+
+        \node (n13) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-6,0)$) {$V_{1,3}$};
+        \node (n24) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0,-6)$) {$V_{2,4}$};
+        \node (ne) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(5,2)$) {$V_{\emptyset}$};
+
+
+        \draw[blue, bend left] (n1) to (n5);
+        \draw[blue, bend left] (n2) to (n5);
+        \draw[blue, bend left] (n3) to (n5);
+        \draw[blue, bend left] (n4) to (n5);
+        
+        \draw[blue] (n5) to (ne);
+        \draw[blue, bend left] (n5) to (n24);
+        \draw[blue, bend left] (n5) to (n13);
+        \draw[blue, bend left] (ne) to (n24);
+
+        \draw[blue,bend right, dashed] (n13) to (n1);
+        \draw[blue,bend right, dashed] (n24) to (n2);
+
+    \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Dla $i \in \{1,2\}$, $V_{i,i+2}$ jest pełne względem $V_{1,2,3,4}$.
-    \end{theorem}
-    \graphSmaller
+    \textbf{3.} Dla każdego $i \in \{1, 2, 3, 4\}$, $V_i$ jest pełne względem $V_{1,2,3,4}$, a co najwyżej jeden wierzchołek z $V_{i,i+2}$ ma sąsiadów w $V_i$. - usunięcie dwóch wierzchołków.
+    \\
+    \centering
+    \begin{tikzpicture}[scale=0.65, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+        % First neighborhood
+        \node (n1) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v1) + (0, 2)$) {$V_1$};
+        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v2) + (-2, 0)$) {$V_2$};
+        \node (n3) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v3) + (0, -2)$) {$V_3$};
+        \node (n4) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v4) + (2, 0)$) {$V_4$};
+        \node (n5) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0, 0)$) {$V_{1,2,3,4}$};
+
+        \node (n13) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-6,0)$) {$V_{1,3}$};
+        \node (n24) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0,-6)$) {$V_{2,4}$};
+        \node (ne) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(5,2)$) {$V_{\emptyset}$};
+
+
+        \draw[blue, bend left] (n1) to (n5);
+        \draw[blue, bend left] (n2) to (n5);
+        \draw[blue, bend left] (n3) to (n5);
+        \draw[blue, bend left] (n4) to (n5);
+        
+        \draw[blue] (n5) to (ne);
+        \draw[blue, bend left] (n5) to (n24);
+        \draw[blue, bend left] (n5) to (n13);
+        \draw[blue, bend left] (ne) to (n24);
+
+    \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Dla każdego $i$, albo $V_{i-1} \cup V_{i-1,i}$, albo $V_{i,i+1} \cup V_{i+1}$ jest puste.
-    \end{theorem}
-    \graphSmaller
+    \textbf{4.} Dla każdego $i$, albo $V_{i-1} \cup V_{i-1,i}$, albo $V_{i,i+1} \cup V_{i+1}$ jest puste. - przyjmujemy $V_3$ i $V_4$ za puste.
+    \\
+    \centering
+    \begin{tikzpicture}[scale=0.65, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+        % First neighborhood
+        \node (n1) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v1) + (0, 2)$) {$V_1$};
+        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v2) + (-2, 0)$) {$V_2$};
+        \node (n3) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v3) + (0, -2)$) {$V_3$};
+        \node (n4) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v4) + (2, 0)$) {$V_4$};
+        \node (n5) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0, 0)$) {$V_{1,2,3,4}$};
+
+        \node (n13) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-6,0)$) {$V_{1,3}$};
+        \node (n24) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0,-6)$) {$V_{2,4}$};
+        \node (ne) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(5,2)$) {$V_{\emptyset}$};
+
+
+        \draw[blue, bend left] (n1) to (n5);
+        \draw[blue, bend left] (n2) to (n5);        
+        \draw[blue] (n5) to (ne);
+
+        \draw[blue, bend left] (n5) to (n24);
+        \draw[blue, bend left] (n5) to (n13);
+        \draw[blue, bend left] (ne) to (n24);
+
+    \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Jeżeli $x \in V_\emptyset$, to $x$ ma co najmniej dwóch sąsiadów w jednym z $V_{1,3}$ lub $V_{2,4}$ i jest antykompletny względem drugiego zbioru. Ponadto, $x$ jest pełny względem $V_{1,2,3,4}$.
-    \end{theorem}
-    \graphSmaller
+    \textbf{5.} Dzięki twierdzeniom:
+    \begin{itemize}
+        \item Dla $i \in \{1,2\}$, $V_{i,i+2}$ jest pełne względem $V_{1,2,3,4}$.
+        \item Jeżeli $x \in V_\emptyset$, to $x$ ma co najmniej dwóch sąsiadów w jednym z $V_{1,3}$ lub $V_{2,4}$ i jest antykompletny względem drugiego zbioru. Ponadto, $x$ jest pełny względem $V_{1,2,3,4}$.
+        \item Dla każdego $i \in \{1, 2, 3, 4\}$, $V_i$ jest pełne względem $V_{1,2,3,4}$, a co najwyżej jeden wierzchołek z $V_{i,i+2}$ ma sąsiadów w $V_i$.
+    \end{itemize}
+    $V_{1,2,3,4}$ jest pełny względem $V_{\emptyset} \cup V_1 \cup V_2 \cup V_{1,3} \cup V_{2,4}$ - wykorzystujemy dopełnienie dwudzielne.
+    \\
+    \centering
+    \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+        % First neighborhood
+        \node (n1) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v1) + (0, 1)$) {$V_1$};
+        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v2) + (-1, 0)$) {$V_2$};
+        \node (n3) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v3) + (0, -1)$) {$V_3$};
+        \node (n4) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v4) + (1, 0)$) {$V_4$};
+        \node (n5) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0, 0)$) {$V_{1,2,3,4}$};
+
+        \node (n13) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-6,0)$) {$V_{1,3}$};
+        \node (n24) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0,-2)$) {$V_{2,4}$};
+        \node (ne) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(5,2)$) {$V_{\emptyset}$};
+
+        \draw[blue, bend left] (ne) to (n24);
+
+    \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Dla każdego $i \in \{1, 2\}$, $|V_{i,i+1} \cup V_{i+2,i+3}| \leq 2$.
-    \end{theorem}
-    \graphSmaller
-\end{frame}
+    \begin{itemize}
+        \item Graf $G[V_{1,2,3,4}]$ jest wolny od $P_1 + P_2$, a więc ma ograniczoną szerokość kliki.
+        \item Jeżeli $x \in V_\emptyset$, to $x$ ma co najmniej dwóch sąsiadów w jednym z $V_{1,3}$ lub $V_{2,4}$ i jest antykompletny względem drugiego zbioru. Ponadto, $x$ jest pełny względem $V_{1,2,3,4}$.
+    \end{itemize}
+    Zatem $V_\emptyset \cup V_{2,4}$ jest łańcuchem dwudzielnym, który ma ograniczoną szerokość kliki.
+    \\
+    \centering
+    \begin{tikzpicture}[scale=0.5, every node/.style={draw, circle, inner sep=1pt, minimum size=6pt}]
+    
+        % First neighborhood
+        \node (n1) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v1) + (0, 1)$) {$V_1$};
+        \node (n2) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v2) + (-1, 0)$) {$V_2$};
+        \node (n3) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v3) + (0, -1)$) {$V_3$};
+        \node (n4) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(v4) + (1, 0)$) {$V_4$};
+        \node (n5) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0, 0)$) {$V_{1,2,3,4}$};
 
-\begin{frame}
-    \begin{theorem}
-        \renewcommand{\qedsymbol}{}
-        Dla każdego $i \in \{1, 2, 3, 4\}$, $V_i$ jest pełne względem $V_{1,2,3,4}$, a co najwyżej jeden wierzchołek z $V_{i,i+2}$ ma sąsiadów w $V_i$.
-    \end{theorem}
-    \graphSmaller
+        \node (n13) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(-6,0)$) {$V_{1,3}$};
+        \node (n24) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(0,-2)$) {$V_{2,4}$};
+        \node (ne) [fill=blue, ellipse, draw=blue, minimum size=15pt, text=white] at ($(5,2)$) {$V_{\emptyset}$};
+
+        \draw[blue, bend left] (ne) to (n24);
+
+    \end{tikzpicture}
 \end{frame}
 
 \begin{frame}
